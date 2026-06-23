@@ -698,6 +698,57 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 1.1rem;
 }
 
+/* 3-Depth Nested Sub-nav */
+.nested-accordion-group {
+  display: flex;
+  flex-direction: column;
+}
+.nested-sub-nav {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  transition: max-height 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.3s ease;
+  background: rgba(0, 0, 0, 0.03); /* slight indent shade */
+  border-left: 2px solid rgba(150, 83, 37, 0.2);
+  margin-left: 14px;
+  margin-right: 6px;
+  border-radius: 4px;
+}
+.nested-sub-nav.expanded {
+  max-height: 250px;
+  opacity: 1;
+  padding: 4px 0;
+  margin-bottom: 4px;
+}
+.sub-sub-nav-btn {
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  color: var(--sdv-text-brown);
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-align: left;
+  padding: 5px 10px;
+  margin: 1px 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+.sub-sub-nav-btn:hover {
+  background: rgba(150, 83, 37, 0.08);
+  color: var(--sdv-text-dark);
+}
+.sub-sub-nav-btn.active {
+  background: rgba(150, 83, 37, 0.12);
+  color: var(--sdv-text-dark);
+  font-weight: 700;
+}
+
 /* View Section handling */
 .view-section {
   display: flex;
@@ -748,7 +799,82 @@ h1, h2, h3, h4, h5, h6 {
 .bundles-container {
   display: flex;
   flex-direction: column;
-  gap: var(--sp-24);
+  gap: 16px;
+}
+
+/* ==============================
+   Data Grid for Crops and Fish
+============================== */
+.data-grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 12px;
+  padding: 8px 4px;
+}
+
+.data-card {
+  background: var(--sdv-bg-card);
+  border: 2px solid rgba(150, 83, 37, 0.15);
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.data-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  border-color: rgba(150, 83, 37, 0.4);
+}
+
+.data-card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Pretendard-SemiBold', sans-serif;
+  font-size: 1.1rem;
+  color: var(--sdv-text-dark);
+  margin-bottom: 4px;
+}
+
+.data-card-icon {
+  font-size: 1.4rem;
+}
+
+.data-card-prop {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  border-bottom: 1px dashed rgba(150, 83, 37, 0.15);
+  padding-bottom: 4px;
+  color: var(--sdv-text-brown);
+}
+
+.data-card-prop:last-child {
+  border-bottom: none;
+}
+
+.data-card-prop-label {
+  font-weight: 500;
+  opacity: 0.8;
+}
+
+.data-card-prop-value {
+  font-weight: 600;
+  color: var(--sdv-text-dark);
+}
+
+.data-card-note {
+  margin-top: 4px;
+  font-size: 0.8rem;
+  color: var(--sdv-text-brown);
+  background: rgba(150, 83, 37, 0.05);
+  padding: 6px;
+  border-radius: 4px;
+  font-style: italic;
 }
 
 .bundle-cards-grid {

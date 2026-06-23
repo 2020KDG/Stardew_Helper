@@ -108,6 +108,60 @@
                 <button class="sub-nav-btn" data-room="조자 지역 개발 서식"><span class="sub-nav-icon">🏗️</span> 조자 지역 개발 서식</button>
               </div>
             </div>
+            <div class="nav-accordion-group">
+              <button class="nav-btn" data-target="view-crops" id="crops-nav-btn">
+                <span class="nav-icon">🥕</span> 작물 정보 <span class="accordion-arrow">▼</span>
+              </button>
+              <div id="crops-sub-nav" class="nav-accordion-content sub-nav">
+                <button class="sub-nav-btn" data-crop-season="봄"><span class="sub-nav-icon">🌸</span> 봄</button>
+                <button class="sub-nav-btn" data-crop-season="여름"><span class="sub-nav-icon">☀️</span> 여름</button>
+                <button class="sub-nav-btn" data-crop-season="가을"><span class="sub-nav-icon">🍂</span> 가을</button>
+                <button class="sub-nav-btn" data-crop-season="겨울"><span class="sub-nav-icon">❄️</span> 겨울</button>
+              </div>
+            </div>
+            <div class="nav-accordion-group">
+              <button class="nav-btn" data-target="view-fish" id="fish-nav-btn">
+                <span class="nav-icon">🐟</span> 물고기 정보 <span class="accordion-arrow">▼</span>
+              </button>
+              <div id="fish-sub-nav" class="nav-accordion-content sub-nav">
+                <div class="nested-accordion-group">
+                  <button class="sub-nav-btn nested-nav-btn" data-fish-season="봄"><span class="sub-nav-icon">🌸</span> 봄 <span class="accordion-arrow">▼</span></button>
+                  <div class="nested-sub-nav">
+                    <button class="sub-sub-nav-btn" data-fish-season="봄" data-fish-loc="산"><span class="sub-nav-icon">⛰️</span> 산</button>
+                    <button class="sub-sub-nav-btn" data-fish-season="봄" data-fish-loc="해변"><span class="sub-nav-icon">🏖️</span> 해변</button>
+                    <button class="sub-sub-nav-btn" data-fish-season="봄" data-fish-loc="마을"><span class="sub-nav-icon">🏘️</span> 마을</button>
+                    <button class="sub-sub-nav-btn" data-fish-season="봄" data-fish-loc="숲"><span class="sub-nav-icon">🌲</span> 숲</button>
+                  </div>
+                </div>
+                <div class="nested-accordion-group">
+                  <button class="sub-nav-btn nested-nav-btn" data-fish-season="여름"><span class="sub-nav-icon">☀️</span> 여름 <span class="accordion-arrow">▼</span></button>
+                  <div class="nested-sub-nav">
+                    <button class="sub-sub-nav-btn" data-fish-season="여름" data-fish-loc="산"><span class="sub-nav-icon">⛰️</span> 산</button>
+                    <button class="sub-sub-nav-btn" data-fish-season="여름" data-fish-loc="해변"><span class="sub-nav-icon">🏖️</span> 해변</button>
+                    <button class="sub-sub-nav-btn" data-fish-season="여름" data-fish-loc="마을"><span class="sub-nav-icon">🏘️</span> 마을</button>
+                    <button class="sub-sub-nav-btn" data-fish-season="여름" data-fish-loc="숲"><span class="sub-nav-icon">🌲</span> 숲</button>
+                  </div>
+                </div>
+                <div class="nested-accordion-group">
+                  <button class="sub-nav-btn nested-nav-btn" data-fish-season="가을"><span class="sub-nav-icon">🍂</span> 가을 <span class="accordion-arrow">▼</span></button>
+                  <div class="nested-sub-nav">
+                    <button class="sub-sub-nav-btn" data-fish-season="가을" data-fish-loc="산"><span class="sub-nav-icon">⛰️</span> 산</button>
+                    <button class="sub-sub-nav-btn" data-fish-season="가을" data-fish-loc="해변"><span class="sub-nav-icon">🏖️</span> 해변</button>
+                    <button class="sub-sub-nav-btn" data-fish-season="가을" data-fish-loc="마을"><span class="sub-nav-icon">🏘️</span> 마을</button>
+                    <button class="sub-sub-nav-btn" data-fish-season="가을" data-fish-loc="숲"><span class="sub-nav-icon">🌲</span> 숲</button>
+                  </div>
+                </div>
+                <div class="nested-accordion-group">
+                  <button class="sub-nav-btn nested-nav-btn" data-fish-season="겨울"><span class="sub-nav-icon">❄️</span> 겨울 <span class="accordion-arrow">▼</span></button>
+                  <div class="nested-sub-nav">
+                    <button class="sub-sub-nav-btn" data-fish-season="겨울" data-fish-loc="산"><span class="sub-nav-icon">⛰️</span> 산</button>
+                    <button class="sub-sub-nav-btn" data-fish-season="겨울" data-fish-loc="해변"><span class="sub-nav-icon">🏖️</span> 해변</button>
+                    <button class="sub-sub-nav-btn" data-fish-season="겨울" data-fish-loc="마을"><span class="sub-nav-icon">🏘️</span> 마을</button>
+                    <button class="sub-sub-nav-btn" data-fish-season="겨울" data-fish-loc="숲"><span class="sub-nav-icon">🌲</span> 숲</button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div class="ad-placeholder mt-auto">
@@ -187,6 +241,34 @@
             </div>
           </div>
           <!-- [/VIEW 3] -->
+
+          <!-- [VIEW 4: Crops] -->
+          <div id="view-crops" class="view-section" style="display: none;">
+            <div class="widget-header sticky-header">
+              <span class="icon">🥕</span>
+              <h2 id="crops-header-title">작물 정보</h2>
+            </div>
+            <div class="scrollable-content">
+              <div id="crops-list" class="data-grid-container">
+                <!-- JS에서 생성 -->
+              </div>
+            </div>
+          </div>
+          <!-- [/VIEW 4] -->
+
+          <!-- [VIEW 5: Fish] -->
+          <div id="view-fish" class="view-section" style="display: none;">
+            <div class="widget-header sticky-header">
+              <span class="icon">🐟</span>
+              <h2 id="fish-header-title">물고기 정보</h2>
+            </div>
+            <div class="scrollable-content">
+              <div id="fish-list" class="data-grid-container">
+                <!-- JS에서 생성 -->
+              </div>
+            </div>
+          </div>
+          <!-- [/VIEW 5] -->
 
         </div>
 

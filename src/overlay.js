@@ -17,6 +17,21 @@ let currentSaveData = null;
 let currentSearchTerm = '';
 let currentFilter = 'all';
 
+let cropsData = null;
+let fishData = null;
+
+async function loadStaticData() {
+  try {
+    const cropsRes = await fetch('data/crops.json');
+    if (cropsRes.ok) cropsData = await cropsRes.json();
+    
+    const fishRes = await fetch('data/fish.json');
+    if (fishRes.ok) fishData = await fishRes.json();
+  } catch (err) {
+    console.error("Failed to load static data:", err);
+  }
+}
+
 function formatMoney(amount) {
   return new Intl.NumberFormat('en-US').format(amount) + 'G';
 }
@@ -438,6 +453,93 @@ function renderJojaBundles() {
   }
 }
 
+function renderCrops(season) {
+  const cropsListEl = document.getElementById("crops-list");
+  const titleEl = document.getElementById("crops-header-title");
+  if (!cropsListEl || !cropsData) return;
+
+  titleEl.textContent = `작물 정보 (${season})`;
+  cropsListEl.innerHTML = '';
+
+  const seasonData = cropsData[season] || [];
+  if (seasonData.length === 0) {
+    cropsListEl.innerHTML = `<div style="padding: 20px; color: #5d3d19;">데이터가 없습니다.</div>`;
+    return;
+  }
+
+  seasonData.forEach(crop => {
+    const card = document.createElement('div');
+    card.className = 'data-card';
+    
+    card.innerHTML = `
+      <div class="data-card-header">
+        <span class="data-card-icon">${crop.icon}</span>
+        ${crop.name}
+      </div>
+      <div class="data-card-prop">
+        <span class="data-card-prop-label">유형</span>
+        <span class="data-card-prop-value">${crop.type || '-'}</span>
+      </div>
+      <div class="data-card-prop">
+        <span class="data-card-prop-label">성장 기간</span>
+        <span class="data-card-prop-value">${crop.growth || '-'}</span>
+      </div>
+      <div class="data-card-prop">
+        <span class="data-card-prop-label">다중 수확</span>
+        <span class="data-card-prop-value">${crop.isMulti === 'O' ? '가능' : '불가능'}</span>
+      </div>
+      <div class="data-card-prop">
+        <span class="data-card-prop-label">씨앗 가격</span>
+        <span class="data-card-prop-value">${crop.seedPrice || '-'}</span>
+      </div>
+      <div class="data-card-prop">
+        <span class="data-card-prop-label">판매 가격</span>
+        <span class="data-card-prop-value">${crop.sellPrice || '-'}</span>
+      </div>
+    `;
+    cropsListEl.appendChild(card);
+  });
+}
+
+function renderFish(season, loc) {
+  const fishListEl = document.getElementById("fish-list");
+  const titleEl = document.getElementById("fish-header-title");
+  if (!fishListEl || !fishData) return;
+
+  titleEl.textContent = `물고기 정보 (${season} - ${loc})`;
+  fishListEl.innerHTML = '';
+
+  const seasonData = fishData[season] || {};
+  const locData = seasonData[loc] || [];
+
+  if (locData.length === 0) {
+    fishListEl.innerHTML = `<div style="padding: 20px; color: #5d3d19;">데이터가 없습니다.</div>`;
+    return;
+  }
+
+  locData.forEach(fish => {
+    const card = document.createElement('div');
+    card.className = 'data-card';
+    
+    card.innerHTML = `
+      <div class="data-card-header">
+        <span class="data-card-icon">${fish.icon}</span>
+        ${fish.name}
+      </div>
+      <div class="data-card-prop">
+        <span class="data-card-prop-label">출현 시간</span>
+        <span class="data-card-prop-value">${fish.time || '-'}</span>
+      </div>
+      <div class="data-card-prop">
+        <span class="data-card-prop-label">판매 가격</span>
+        <span class="data-card-prop-value">${fish.sellPrice || '-'}</span>
+      </div>
+      ${fish.note ? `<div class="data-card-note">${fish.note}</div>` : ''}
+    `;
+    fishListEl.appendChild(card);
+  });
+}
+
 async function triggerManualRefresh() {
   try {
     const data = await invoke("trigger_manual_refresh");
@@ -512,9 +614,51 @@ function setupNavigation() {
     });
   });
 
+  const subSubNavBtns = document.querySelectorAll('.sub-sub-nav-btn');
+  const nestedNavBtns = document.querySelectorAll('.nested-nav-btn');
+
+  if (nestedNavBtns) {
+    nestedNavBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const parent = btn.closest('.nested-accordion-group');
+        if (parent) {
+          const subNav = parent.querySelector('.nested-sub-nav');
+          if (subNav) {
+            subNav.classList.toggle('expanded');
+          }
+        }
+      });
+    });
+  }
+
+  if (subSubNavBtns) {
+    subSubNavBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const fishSeason = btn.getAttribute('data-fish-season');
+        const fishLoc = btn.getAttribute('data-fish-loc');
+        if (fishSeason && fishLoc) {
+          renderFish(fishSeason, fishLoc);
+          subNavBtns.forEach(b => b.classList.remove('active'));
+          subSubNavBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+        }
+      });
+    });
+  }
+
   if (subNavBtns && mainScrollArea) {
     subNavBtns.forEach(btn => {
       btn.addEventListener('click', () => {
+        // Crop Season Logic
+        const cropSeason = btn.getAttribute('data-crop-season');
+        if (cropSeason) {
+          renderCrops(cropSeason);
+          subNavBtns.forEach(b => b.classList.remove('active'));
+          if (subSubNavBtns) subSubNavBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          return;
+        }
+
         let targetSection = null;
         let titleSelector = null;
 
@@ -569,6 +713,8 @@ function setupNavigation() {
             const roomName = b.getAttribute('data-room');
             const achieveCat = b.getAttribute('data-achieve-cat');
             
+            if (!roomName && !achieveCat) return; // Skip buttons that don't use scroll spy
+
             let isMatch = false;
             if (roomName && currentTargetId === `room-${roomName}`) isMatch = true;
             if (achieveCat && currentTargetId === `achieve-cat-${achieveCat.replace(/ /g, '-')}`) isMatch = true;
@@ -635,6 +781,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
   setupFiltersAndSearch();
   setupNavigation();
+  loadStaticData();
 
   if (refreshIconBtn) {
     refreshIconBtn.addEventListener("click", () => {

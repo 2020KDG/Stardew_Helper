@@ -1,0 +1,540 @@
+{
+  "봄": [],
+  "여름": [
+    {
+      "name": "멜론",
+      "icon": "🍈",
+      "type": "과일",
+      "isMulti": "×",
+      "growth": "12d",
+      "seedPrice": "6d",
+      "sellPrice": "80g"
+    },
+    {
+      "name": "블루베리",
+      "icon": "🫐",
+      "type": "과일",
+      "isMulti": "✔\n(4d)",
+      "growth": "13d",
+      "seedPrice": "7d",
+      "sellPrice": "80g"
+    },
+    {
+      "name": "매운 고추",
+      "icon": "🌱",
+      "type": "과일",
+      "isMulti": "✔\n(3d)",
+      "growth": "5d",
+      "seedPrice": "2d",
+      "sellPrice": "40g"
+    },
+    {
+      "name": "토마토",
+      "icon": "🍅",
+      "type": "야채",
+      "isMulti": "✔\n(4d)",
+      "growth": "11d",
+      "seedPrice": "6d",
+      "sellPrice": "50g"
+    },
+    {
+      "name": "옥수수",
+      "icon": "🌽",
+      "type": "야채",
+      "isMulti": "✔\n(4d)",
+      "growth": "14d",
+      "seedPrice": "7d",
+      "sellPrice": "150g"
+    },
+    {
+      "name": "밀",
+      "icon": "🌾",
+      "type": "야채",
+      "isMulti": "×",
+      "growth": "4d",
+      "seedPrice": "2d",
+      "sellPrice": "10g"
+    },
+    {
+      "name": "여름호박",
+      "icon": "🌱",
+      "type": "야채",
+      "isMulti": "✔\n(3d)",
+      "growth": "6d",
+      "seedPrice": "3d",
+      "sellPrice": "20g\n(안심고 팔면\n받을 금액)"
+    },
+    {
+      "name": "무",
+      "icon": "🌱",
+      "type": "야채",
+      "isMulti": "×",
+      "growth": "6d",
+      "seedPrice": "3d",
+      "sellPrice": "40g"
+    },
+    {
+      "name": "홉",
+      "icon": "🌱",
+      "type": "야채",
+      "isMulti": "✔\n(1d)",
+      "growth": "11d",
+      "seedPrice": "7d",
+      "sellPrice": "60g"
+    },
+    {
+      "name": "스타프루트",
+      "icon": "🌱",
+      "type": "과일",
+      "isMulti": "×",
+      "growth": "13d",
+      "seedPrice": "7d",
+      "sellPrice": "400g"
+    },
+    {
+      "name": "붉은 양배추",
+      "icon": "🌱",
+      "type": "야채",
+      "isMulti": "×",
+      "growth": "9d",
+      "seedPrice": "5d",
+      "sellPrice": "100g"
+    },
+    {
+      "name": "해바라기",
+      "icon": "🌻",
+      "type": "꽃",
+      "isMulti": "×",
+      "growth": "8d",
+      "seedPrice": "4d",
+      "sellPrice": "200g"
+    },
+    {
+      "name": "여름별꽃",
+      "icon": "🌱",
+      "type": "꽃",
+      "isMulti": "×",
+      "growth": "8d",
+      "seedPrice": "4d",
+      "sellPrice": "50g"
+    },
+    {
+      "name": "양귀비",
+      "icon": "🌱",
+      "type": "꽃",
+      "isMulti": "×",
+      "growth": "7d",
+      "seedPrice": "3d",
+      "sellPrice": "100g"
+    }
+  ],
+  "가을": [
+    {
+      "name": "옥수수",
+      "icon": "🌽",
+      "type": "야채",
+      "isMulti": "✔\n(4d)",
+      "growth": "14d",
+      "seedPrice": "7d",
+      "sellPrice": "150g"
+    },
+    {
+      "name": "가지",
+      "icon": "🍆",
+      "type": "야채",
+      "isMulti": "✔\n(5d)",
+      "growth": "5d",
+      "seedPrice": "2d",
+      "sellPrice": "20g"
+    },
+    {
+      "name": "호박",
+      "icon": "🎃",
+      "type": "야채",
+      "isMulti": "×",
+      "growth": "13d",
+      "seedPrice": "7d",
+      "sellPrice": "100g"
+    },
+    {
+      "name": "참마",
+      "icon": "🍠",
+      "type": "야채",
+      "isMulti": "×",
+      "growth": "10d",
+      "seedPrice": "5d",
+      "sellPrice": "60g"
+    },
+    {
+      "name": "크랜베리",
+      "icon": "🍒",
+      "type": "과일",
+      "isMulti": "✔\n(5d)",
+      "growth": "7d",
+      "seedPrice": "3d",
+      "sellPrice": "240g"
+    },
+    {
+      "name": "포도",
+      "icon": "🍇",
+      "type": "과일",
+      "isMulti": "✔\n(3d)",
+      "growth": "10d",
+      "seedPrice": "6d",
+      "sellPrice": "60g"
+    },
+    {
+      "name": "청경채",
+      "icon": "🥬",
+      "type": "야채",
+      "isMulti": "×",
+      "growth": "4d",
+      "seedPrice": "2d",
+      "sellPrice": "50g"
+    },
+    {
+      "name": "아티초크",
+      "icon": "🌵",
+      "type": "야채",
+      "isMulti": "×",
+      "growth": "8d",
+      "seedPrice": "4d",
+      "sellPrice": "30g"
+    },
+    {
+      "name": "브로콜리",
+      "icon": "🌱",
+      "type": "야채",
+      "isMulti": "✔\n(4d)",
+      "growth": "8d",
+      "seedPrice": "4d",
+      "sellPrice": "40g\n(안심고 팔면\n받을 금액)"
+    },
+    {
+      "name": "아마란스",
+      "icon": "🌸",
+      "type": "야채",
+      "isMulti": "×",
+      "growth": "7d",
+      "seedPrice": "3d",
+      "sellPrice": "70g"
+    },
+    {
+      "name": "사탕무",
+      "icon": "🌱",
+      "type": "야채",
+      "isMulti": "×",
+      "growth": "6d",
+      "seedPrice": "3d",
+      "sellPrice": "20g"
+    },
+    {
+      "name": "밀",
+      "icon": "🌾",
+      "type": "야채",
+      "isMulti": "×",
+      "growth": "4d",
+      "seedPrice": "2d",
+      "sellPrice": "10g"
+    },
+    {
+      "name": "해바라기",
+      "icon": "🌻",
+      "type": "꽃",
+      "isMulti": "×",
+      "growth": "8d",
+      "seedPrice": "4d",
+      "sellPrice": "200g"
+    },
+    {
+      "name": "요정장미",
+      "icon": "🌹",
+      "type": "꽃",
+      "isMulti": "×",
+      "growth": "12d",
+      "seedPrice": "6d",
+      "sellPrice": "200g"
+    },
+    {
+      "name": "기본 비료",
+      "icon": "🌱",
+      "type": "",
+      "isMulti": "",
+      "growth": "",
+      "seedPrice": "",
+      "sellPrice": ""
+    },
+    {
+      "name": "고급 비료",
+      "icon": "🌱",
+      "type": "",
+      "isMulti": "",
+      "growth": "",
+      "seedPrice": "",
+      "sellPrice": ""
+    },
+    {
+      "name": "디럭스 비료",
+      "icon": "🌱",
+      "type": "",
+      "isMulti": "",
+      "growth": "",
+      "seedPrice": "",
+      "sellPrice": ""
+    },
+    {
+      "name": "성장 촉진제",
+      "icon": "🌱",
+      "type": "",
+      "isMulti": "",
+      "growth": "",
+      "seedPrice": "",
+      "sellPrice": ""
+    },
+    {
+      "name": "디럭스 \n성장 촉진제",
+      "icon": "🌱",
+      "type": "",
+      "isMulti": "",
+      "growth": "",
+      "seedPrice": "",
+      "sellPrice": ""
+    },
+    {
+      "name": "하이퍼\n성장 촉진제",
+      "icon": "🌱",
+      "type": "",
+      "isMulti": "",
+      "growth": "",
+      "seedPrice": "",
+      "sellPrice": ""
+    },
+    {
+      "name": "기본 보습 토양",
+      "icon": "🌱",
+      "type": "",
+      "isMulti": "",
+      "growth": "",
+      "seedPrice": "",
+      "sellPrice": ""
+    },
+    {
+      "name": "고급 보습 토양",
+      "icon": "🌱",
+      "type": "",
+      "isMulti": "",
+      "growth": "",
+      "seedPrice": "",
+      "sellPrice": ""
+    },
+    {
+      "name": "디럭스\n보습 토양",
+      "icon": "🌱",
+      "type": "",
+      "isMulti": "",
+      "growth": "",
+      "seedPrice": "",
+      "sellPrice": ""
+    },
+    {
+      "name": "나무용 비료",
+      "icon": "🌱",
+      "type": "",
+      "isMulti": "",
+      "growth": "",
+      "seedPrice": "",
+      "sellPrice": ""
+    },
+    {
+      "name": "절\n임\n통",
+      "icon": "🌱",
+      "type": "",
+      "isMulti": "",
+      "growth": "",
+      "seedPrice": "술\n통",
+      "sellPrice": ""
+    },
+    {
+      "name": "탈\n수\n기",
+      "icon": "🌱",
+      "type": "",
+      "isMulti": "",
+      "growth": "",
+      "seedPrice": "",
+      "sellPrice": ""
+    },
+    {
+      "name": "숙\n성\n용\n나\n무\n통",
+      "icon": "🌱",
+      "type": "",
+      "isMulti": "",
+      "growth": "→",
+      "seedPrice": "",
+      "sellPrice": ""
+    }
+  ],
+  "겨울": [
+    {
+      "name": "파우더멜론",
+      "icon": "🌱",
+      "type": "과일",
+      "isMulti": "×",
+      "growth": "7d",
+      "seedPrice": "3d",
+      "sellPrice": "20g\n(안심고 팔면\n받을 금액)"
+    },
+    {
+      "name": "씨앗 모음",
+      "icon": "🌱",
+      "type": "-",
+      "isMulti": "×",
+      "growth": "-",
+      "seedPrice": "-",
+      "sellPrice": "-"
+    },
+    {
+      "name": "꽃 씨앗 모음",
+      "icon": "🌱",
+      "type": "-",
+      "isMulti": "×",
+      "growth": "-",
+      "seedPrice": "-",
+      "sellPrice": "-"
+    },
+    {
+      "name": "야생 씨앗",
+      "icon": "🌱",
+      "type": "-",
+      "isMulti": "×",
+      "growth": "7d",
+      "seedPrice": "3d",
+      "sellPrice": "회관보상\n제작"
+    },
+    {
+      "name": "커피콩",
+      "icon": "☕",
+      "type": "특수",
+      "isMulti": "✔\n(2d)",
+      "growth": "10d",
+      "seedPrice": "5d",
+      "sellPrice": "15g\n(안 심고\n팔 경우)"
+    },
+    {
+      "name": "달콤보석베리",
+      "icon": "🌱",
+      "type": "특수",
+      "isMulti": "×",
+      "growth": "24d",
+      "seedPrice": "13d",
+      "sellPrice": "1000g"
+    },
+    {
+      "name": "선인장 열매",
+      "icon": "🌱",
+      "type": "과일",
+      "isMulti": "✔\n(3d)",
+      "growth": "12d",
+      "seedPrice": "6d",
+      "sellPrice": "150g"
+    },
+    {
+      "name": "고대 과일",
+      "icon": "🌱",
+      "type": "과일",
+      "isMulti": "✔\n(7d)",
+      "growth": "28d",
+      "seedPrice": "15d",
+      "sellPrice": "다양한\n입수 경로"
+    },
+    {
+      "name": "파인애플",
+      "icon": "🍍",
+      "type": "과일",
+      "isMulti": "✔\n(7d)",
+      "growth": "14d",
+      "seedPrice": "7d",
+      "sellPrice": "다양한\n입수 경로"
+    },
+    {
+      "name": "토란\n(수역)",
+      "icon": "🌱",
+      "type": "야채",
+      "isMulti": "×",
+      "growth": "7d",
+      "seedPrice": "3d",
+      "sellPrice": "다양한\n입수 경로"
+    },
+    {
+      "name": "찻잎",
+      "icon": "🌱",
+      "type": "야채",
+      "isMulti": "✔\n(1d)",
+      "growth": "20d",
+      "seedPrice": "-",
+      "sellPrice": "제작"
+    },
+    {
+      "name": "섬유",
+      "icon": "🌱",
+      "type": "자원",
+      "isMulti": "×",
+      "growth": "7d",
+      "seedPrice": "-",
+      "sellPrice": "제작"
+    },
+    {
+      "name": "치 열매",
+      "icon": "🌱",
+      "type": "과일",
+      "isMulti": "×",
+      "growth": "4d",
+      "seedPrice": "2d",
+      "sellPrice": "다양한\n입수 경로"
+    },
+    {
+      "name": "외형",
+      "icon": "🌱",
+      "type": "",
+      "isMulti": "",
+      "growth": "",
+      "seedPrice": "",
+      "sellPrice": ""
+    },
+    {
+      "name": "씨앗",
+      "icon": "🌱",
+      "type": "",
+      "isMulti": "",
+      "growth": "",
+      "seedPrice": "",
+      "sellPrice": ""
+    },
+    {
+      "name": "계절",
+      "icon": "🌱",
+      "type": "",
+      "isMulti": "",
+      "growth": "여름",
+      "seedPrice": "",
+      "sellPrice": ""
+    },
+    {
+      "name": "외형",
+      "icon": "🌱",
+      "type": "",
+      "isMulti": "",
+      "growth": "오렌지나무",
+      "seedPrice": "",
+      "sellPrice": "석류나무"
+    },
+    {
+      "name": "기타",
+      "icon": "🌱",
+      "type": "",
+      "isMulti": "",
+      "growth": "",
+      "seedPrice": "",
+      "sellPrice": ""
+    }
+  ]
+}
