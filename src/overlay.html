@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stardew Overlay Dashboard</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- 전면 딤(Dim) 배경 -->
+    <div class="overlay-wrapper">
+      
+      <!-- 우측 상단 컨트롤 패널 -->
+      <div class="top-right-controls">
+        <span id="mode-badge" class="badge">오버레이 활성화 됨</span>
+        <button id="refresh-icon-btn" class="icon-btn" title="Refresh Data">🔄</button>
+      </div>
+
+      <!-- 대시보드 메인 보드 -->
+      <div id="main-dashboard" class="dashboard-board sdv-panel">
+        
+        <!-- 좌측 사이드바: 240px -->
+        <div class="dashboard-sidebar">
+          <div class="widget-header">
+            <div class="header-left">
+              <span class="icon">✨</span>
+              <h2>농장 정보</h2>
+            </div>
+          </div>
+          
+          <div class="stat-card">
+            <div class="stat-row">
+              <span class="icon-label">👤</span>
+              <span class="value" id="player-name">Waiting...</span>
+            </div>
+            <div class="stat-row">
+              <span class="icon-label">🏡</span>
+              <span class="value" id="farm-name">Waiting...</span>
+            </div>
+            <div class="stat-row">
+              <span class="icon-label">💰</span>
+              <span class="value gold" id="money">0G</span>
+            </div>
+            <div class="stat-row">
+              <span class="icon-label">📅</span>
+              <span class="value" id="date">Year 1, Spring 1</span>
+            </div>
+          </div>
+          <div class="sidebar-action-box" style="margin-bottom: 20px;">
+            <button id="install-mod-btn" class="action-btn" title="실시간 연동 모드 자동 설치">
+              🚀 SMAPI 모드 원클릭 설치
+            </button>
+          </div>
+
+          <div class="sidebar-nav">
+            <div class="nav-accordion-group">
+              <button class="nav-btn active" data-target="view-achievements" id="achieve-nav-btn">
+                <span class="nav-icon">🏆</span> 도전과제 <span class="accordion-arrow">▼</span>
+              </button>
+              <div class="nav-accordion-content sub-nav expanded" id="achieve-submenu">
+                <button class="sub-nav-btn" data-achieve-cat="재력">
+                  <span class="nav-label">💰 재력</span><span class="nav-count"></span>
+                </button>
+                <button class="sub-nav-btn" data-achieve-cat="우정">
+                  <span class="nav-label">❤️ 우정</span><span class="nav-count"></span>
+                </button>
+                <button class="sub-nav-btn" data-achieve-cat="요리">
+                  <span class="nav-label">🍳 요리</span><span class="nav-count"></span>
+                </button>
+                <button class="sub-nav-btn" data-achieve-cat="제작 및 업그레이드">
+                  <span class="nav-label">🛠 제작 및 업그레이드</span><span class="nav-count"></span>
+                </button>
+                <button class="sub-nav-btn" data-achieve-cat="낚시">
+                  <span class="nav-label">🐟 낚시</span><span class="nav-count"></span>
+                </button>
+                <button class="sub-nav-btn" data-achieve-cat="수집">
+                  <span class="nav-label">🏆 수집</span><span class="nav-count"></span>
+                </button>
+                <button class="sub-nav-btn" data-achieve-cat="모험">
+                  <span class="nav-label">⚔️ 모험</span><span class="nav-count"></span>
+                </button>
+                <button class="sub-nav-btn" data-achieve-cat="심부름">
+                  <span class="nav-label">📋 심부름</span><span class="nav-count"></span>
+                </button>
+                <button class="sub-nav-btn" data-achieve-cat="스킬">
+                  <span class="nav-label">⭐ 스킬</span><span class="nav-count"></span>
+                </button>
+                <button class="sub-nav-btn" data-achieve-cat="기타">
+                  <span class="nav-label">✨ 기타</span><span class="nav-count"></span>
+                </button>
+              </div>
+            </div>
+            <div class="nav-accordion-group">
+              <button class="nav-btn" data-target="view-bundles" id="cc-nav-btn">
+                <span class="nav-icon">🍏</span> 마을회관 <span class="accordion-arrow">▼</span>
+              </button>
+              <div id="cc-sub-nav" class="nav-accordion-content sub-nav">
+                <button class="sub-nav-btn" data-room="식료품 저장실"><span class="sub-nav-icon">🌱</span> 식료품 저장실</button>
+                <button class="sub-nav-btn" data-room="공예실"><span class="sub-nav-icon">🧶</span> 공예실</button>
+                <button class="sub-nav-btn" data-room="보일러실"><span class="sub-nav-icon">⚒️</span> 보일러실</button>
+                <button class="sub-nav-btn" data-room="금고"><span class="sub-nav-icon">💰</span> 금고</button>
+                <button class="sub-nav-btn" data-room="어항"><span class="sub-nav-icon">🐠</span> 어항</button>
+                <button class="sub-nav-btn" data-room="게시판"><span class="sub-nav-icon">📌</span> 게시판</button>
+                <button class="sub-nav-btn" data-room="버려진 조자마트"><span class="sub-nav-icon">🛒</span> 버려진 조자마트</button>
+              </div>
+            </div>
+            <div class="nav-accordion-group">
+              <button class="nav-btn" data-target="view-joja" id="joja-nav-btn">
+                <span class="nav-icon">🏢</span> 조자마트 <span class="accordion-arrow">▼</span>
+              </button>
+              <div id="joja-sub-nav" class="nav-accordion-content sub-nav">
+                <button class="sub-nav-btn" data-room="조자 지역 개발 서식"><span class="sub-nav-icon">🏗️</span> 조자 지역 개발 서식</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="ad-placeholder mt-auto">
+            <span class="ad-label">Advertisement</span>
+            <div class="ad-banner">
+              <p>Reserved for sponsorship</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 우측 메인 공간 -->
+        <div class="dashboard-main">
+          
+          <!-- [VIEW 1: Achievements] -->
+          <div id="view-achievements" class="view-section active">
+            <div class="widget-header sticky-header">
+              <span class="icon">🏆</span>
+              <h2 id="achievements-header-title">도전과제 진행상황: 0 / 49 완료</h2>
+            </div>
+
+            <!-- 검색 및 필터 바 -->
+            <div class="filter-bar">
+              <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="search-input" placeholder="도전과제 검색..." />
+              </div>
+              <div class="filter-controls">
+                <button class="filter-btn active" data-filter="all">전체</button>
+                <button class="filter-btn" data-filter="progress">진행중</button>
+                <button class="filter-btn" data-filter="completed">완료</button>
+              </div>
+            </div>
+            
+            <div class="scrollable-content">
+              <div id="achievements-list" class="achievements-grid">
+                <!-- JS에서 생성 -->
+              </div>
+            </div>
+          </div>
+          <!-- [/VIEW 1] -->
+
+          <!-- [VIEW 2: Bundles] -->
+          <div id="view-bundles" class="view-section" style="display: none;">
+            <div class="widget-header sticky-header">
+              <span class="icon">🍏</span>
+              <h2>마을회관 번들</h2>
+            </div>
+
+            <!-- 번들 전용 필터 바 -->
+            <div class="filter-bar">
+              <div class="filter-controls">
+                <button class="bundle-filter-btn active" data-filter="all">전체</button>
+                <button class="bundle-filter-btn" data-filter="progress">진행중</button>
+                <button class="bundle-filter-btn" data-filter="completed">완료</button>
+              </div>
+            </div>
+
+            <div class="scrollable-content">
+              <div id="bundles-list" class="bundles-container">
+                <!-- JS에서 생성 -->
+              </div>
+            </div>
+          </div>
+          <!-- [/VIEW 2] -->
+
+          <!-- [VIEW 3: JojaMart] -->
+          <div id="view-joja" class="view-section" style="display: none;">
+            <div class="widget-header sticky-header">
+              <span class="icon">🏢</span>
+              <h2>조자마트 지역 개발</h2>
+            </div>
+
+            <div class="scrollable-content">
+              <div id="joja-list" class="bundles-container">
+                <!-- JS에서 생성 -->
+              </div>
+            </div>
+          </div>
+          <!-- [/VIEW 3] -->
+
+        </div>
+
+      </div>
+    </div>
+
+    <script type="module" src="overlay.js"></script>
+  </body>
+</html>

@@ -1,0 +1,8 @@
+C:\Users\ehrbs\Documents\Stardew_Helper\StardewHelperMod\obj\Debug\net6.0\StardewHelperMod.csproj.AssemblyReference.cache
+C:\Users\ehrbs\Documents\Stardew_Helper\StardewHelperMod\obj\Debug\net6.0\StardewHelperMod.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ehrbs\Documents\Stardew_Helper\StardewHelperMod\obj\Debug\net6.0\StardewHelperMod.AssemblyInfoInputs.cache
+C:\Users\ehrbs\Documents\Stardew_Helper\StardewHelperMod\obj\Debug\net6.0\StardewHelperMod.AssemblyInfo.cs
+C:\Users\ehrbs\Documents\Stardew_Helper\StardewHelperMod\obj\Debug\net6.0\StardewHelperMod.csproj.CoreCompileInputs.cache
+C:\Users\ehrbs\Documents\Stardew_Helper\StardewHelperMod\bin\Debug\net6.0\StardewHelperMod.deps.json
+C:\Users\ehrbs\Documents\Stardew_Helper\StardewHelperMod\bin\Debug\net6.0\StardewHelperMod.dll
+C:\Users\ehrbs\Documents\Stardew_Helper\StardewHelperMod\obj\Debug\net6.0\StardewHelperMod.dll

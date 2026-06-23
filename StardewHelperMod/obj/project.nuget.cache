@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "QnUj7ScVK7tOn4jNU9ztqV46l+UzoTYZAj+KPkd9DrlCWNZOBbYvarTCndwcZsj5G+DfTwpRLIy+YbvEOskeEA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\ehrbs\\Documents\\Stardew_Helper\\StardewHelperMod\\StardewHelperMod.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ehrbs\\.nuget\\packages\\pathoschild.stardew.modbuildconfig\\4.4.0\\pathoschild.stardew.modbuildconfig.4.4.0.nupkg.sha512"
+  ],
+  "logs": []
+}
