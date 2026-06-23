@@ -23,8 +23,12 @@ window.addEventListener("DOMContentLoaded", async () => {
   // --- Auto Updater ---
   async function checkForUpdates() {
     try {
+      console.log("Checking for updates...");
       const update = await invoke('plugin:updater|check');
-      if (update && update.available) {
+      console.log("Update check result:", update);
+      
+      // In Tauri v2, update is either null or an object with version info.
+      if (update && update.version) {
         if (confirm(`✨ 새로운 버전(${update.version})이 출시되었습니다!\n지금 바로 업데이트를 설치하고 다시 시작하시겠습니까?`)) {
           // Show updating UI
           const loadingStatusText = document.getElementById('loading-status-text');
