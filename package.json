@@ -1,7 +1,8 @@
 {
-  "name": "tauri-app",
+  "name": "stardew-helper-gui",
   "private": true,
-  "version": "1.1.0",
+  "version": "1.2.0",
+  "description": "Stardew Helper with SMAPI IPC and Overlays",
   "type": "module",
   "scripts": {
     "tauri": "tauri"
