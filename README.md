@@ -20,13 +20,11 @@ Stardew Helper는 스타듀밸리(Stardew Valley)를 더욱 쾌적하게 즐길 
 
 ## 📥 다운로드 및 설치
 
-[**👉 최신 버전 다운로드 바로가기 (Releases)**](https://github.com/2020KDG/Stardew_Helper/releases/latest)
+위 링크에 접속하거나 아래의 다이렉트 링크를 클릭하여 사용 환경에 맞는 파일을 바로 다운로드하세요.
 
-위 링크에 접속하여 사용 환경에 맞는 파일을 다운로드하세요.
-
-1. **설치형 버전 (추천)**: `Stardew Helper_1.x.x_x64-setup.exe`
+1. **설치형 버전 (추천)**: [📥 Stardew Helper_1.0.0_x64-setup.exe 다운로드](https://github.com/2020KDG/Stardew_Helper/releases/download/Test_version/Stardew.Helper_1.0.0_x64-setup.exe)
    - 다운로드 후 실행하여 마법사의 안내에 따라 설치를 진행합니다. (바탕화면 바로가기 추가 지원)
-2. **무설치 버전 (Portable)**: `StardewHelper_Portable.exe`
+2. **무설치 버전 (Portable)**: [📥 StardewHelper_Portable.exe 다운로드](https://github.com/2020KDG/Stardew_Helper/releases/download/Test_version/StardewHelper_Portable.exe)
    - 설치 과정 없이 다운로드 후 바로 더블 클릭하여 사용할 수 있습니다.
 
 ---
