@@ -80,3 +80,51 @@ jobs:
           }
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload Portable Executable and Mod
+        run: |
+          if (Test-Path "src-tauri/target/release/tauri-app.exe") {
+            Copy-Item -Force "src-tauri/target/release/tauri-app.exe" "StardewHelper_Portable.exe"
+            gh release upload ${{ steps.tag.outputs.TAG_NAME }} StardewHelper_Portable.exe --clobber
+          }
+          
+          # Test_version에서 기존 모드 파일을 받아서 새 릴리즈에도 복사 업로드
+          if ("${{ steps.tag.outputs.TAG_NAME }}" -ne "Test_version") {
+            try {
+              gh release download Test_version -p "StardewHelperMod.zip"
+              if (Test-Path "StardewHelperMod.zip") {
+                gh release upload ${{ steps.tag.outputs.TAG_NAME }} StardewHelperMod.zip --clobber
+              }
+            } catch {
+              Write-Host "No StardewHelperMod.zip found in Test_version."
+            }
+          }
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update README.md
+        if: steps.tag.outputs.IS_PRE_RELEASE == 'false'
+        run: |
+          $version = "${{ steps.tag.outputs.TAG_NAME }}".TrimStart('v')
+          $readmePath = "README.md"
+          $content = Get-Content $readmePath -Raw
+          
+          # 버전 번호와 다운로드 태그 링크 교체
+          $content = $content -replace "Stardew\.Helper_[0-9\.]+_x64-setup\.exe", "Stardew.Helper_${version}_x64-setup.exe"
+          $content = $content -replace "Stardew Helper_[0-9\.]+_x64-setup\.exe", "Stardew Helper_${version}_x64-setup.exe"
+          $content = $content -replace "download/[^/]+/", "download/${{ steps.tag.outputs.TAG_NAME }}/"
+          
+          $content | Set-Content $readmePath
+          
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add $readmePath
+          
+          # 변경사항이 있을 때만 커밋 및 푸시
+          if (git diff --cached --quiet) {
+            Write-Host "No changes to README.md"
+          } else {
+            git commit -m "docs: update download links to ${{ steps.tag.outputs.TAG_NAME }} [skip ci]"
+            git fetch origin main
+            git push origin HEAD:main
+          }
