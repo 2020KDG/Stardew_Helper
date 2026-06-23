@@ -494,12 +494,18 @@ function renderCrops(season) {
         <td>${crop.gpd || '-'}</td>
         <td style="white-space:pre-wrap;">${crop.epg || '-'}</td>
         <td style="text-align:left; max-width: 200px; word-wrap: break-word; white-space:pre-wrap;">${crop.notes || '-'}</td>
-        <td style="text-align:left; max-width: 200px; word-wrap: break-word; font-weight:bold; color:#d35400;">${crop.evalScore || '-'}</td>
+
       </tr>
     `;
   });
 
-  tableContainer.innerHTML = `
+  const evalScoreText = locData.find(c => c.evalScore && c.evalScore !== '-')?.evalScore || null;
+  let evalScoreHtml = '';
+  if (evalScoreText) {
+    evalScoreHtml = `<div style="margin-bottom: 10px; padding: 15px; background-color: #fce8cd; border: 1px solid #d35400; border-radius: 5px; color: #d35400; font-weight: bold; white-space: pre-wrap; line-height: 1.4;">해당지역 수익성:<br>${evalScoreText}</div>`;
+  }
+
+  tableContainer.innerHTML = evalScoreHtml + `
     <table class="data-table">
       <thead>
         <tr>
@@ -514,7 +520,7 @@ function renderCrops(season) {
           <th>GPD</th>
           <th>EPG</th>
           <th style="text-align:left;">특이사항</th>
-          <th style="text-align:left;">평가</th>
+
         </tr>
       </thead>
       <tbody>
@@ -596,12 +602,18 @@ function renderFish(season, loc) {
         <td style="white-space:pre-wrap;">${fish.epg || '-'}</td>
         <td style="text-align:left; max-width: 200px; word-wrap: break-word; white-space:pre-wrap;">${formattedNote}</td>
         <td style="white-space:pre-wrap;">${fish.diff || '-'}</td>
-        <td style="text-align:left; max-width: 200px; word-wrap: break-word; font-weight:bold; color:#d35400;">${fish.evalScore || '-'}</td>
+
       </tr>
     `;
   });
 
-  tableContainer.innerHTML = `
+  const evalScoreText = locData.find(f => f.evalScore && f.evalScore !== '-')?.evalScore || null;
+  let evalScoreHtml = '';
+  if (evalScoreText) {
+    evalScoreHtml = `<div style="margin-bottom: 10px; padding: 15px; background-color: #fce8cd; border: 1px solid #d35400; border-radius: 5px; color: #d35400; font-weight: bold; white-space: pre-wrap; line-height: 1.4;">해당지역 수익성:<br>${evalScoreText}</div>`;
+  }
+
+  tableContainer.innerHTML = evalScoreHtml + `
     <table class="data-table">
       <thead>
         <tr>
@@ -612,7 +624,7 @@ function renderFish(season, loc) {
           <th>EPG</th>
           <th style="text-align:left;">특이사항</th>
           <th>난이도</th>
-          <th style="text-align:left;">평가</th>
+
         </tr>
       </thead>
       <tbody>
