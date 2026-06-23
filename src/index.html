@@ -28,123 +28,165 @@
       <div class="launcher-bg-silhouette"></div>
 
       <div id="app-container">
-      
-      <div id="launcher-view" class="view-container active">
+          <div id="launcher-view" class="view-container active">
         <div class="launcher-dashboard-container">
-          <!-- Top Navigation Header -->
-          <div class="launcher-header">
-            <div class="launcher-top-tabs">
-              <button class="top-tab-btn active" data-tab="dashboard">
-                <svg width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
+          <!-- Left Sidebar Navigation -->
+          <aside class="launcher-sidebar">
+            <div class="sidebar-nav">
+              <button class="sidebar-nav-btn active" data-tab="dashboard">
+                <svg width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
                 <span>대시보드</span>
               </button>
-              <button class="top-tab-btn" data-tab="hotkey">
-                <svg width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="M21 2H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h7v2H8v2h8v-2h-2v-2h7c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H3V4h18v12zM5 9h2v2H5zm0-3h2v2H5zm0 6h2v2H5zm4-6h2v2H9zm0 3h2v2H9zm0 3h2v2H9zm4-6h2v2h-2zm0 3h2v2h-2zm0 3h2v2h-2zm4-6h2v2h-2zm0 3h2v2h-2zm0 3h2v2h-2z"/></svg>
-                <span>단축키 설정</span>
-              </button>
-              <button class="top-tab-btn" data-tab="mods">
-                <svg width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="M20.5 11H19V7c0-1.1-.9-2-2-2h-4V3.5C13 2.12 11.88 1 10.5 1S8 2.12 8 3.5V5H4c-1.1 0-1.99.9-1.99 2v3.8H3.5c1.49 0 2.7 1.21 2.7 2.7s-1.21 2.7-2.7 2.7H2V20c0 1.1.9 2 2 2h3.8v-1.5c0-1.49 1.21-2.7 2.7-2.7 1.49 0 2.7 1.21 2.7 2.7V22H17c1.1 0 2-.9 2-2v-4h1.5c1.38 0 2.5-1.12 2.5-2.5S21.88 11 20.5 11z"/></svg>
+              <button class="sidebar-nav-btn" data-tab="mods">
+                <svg width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M20.5 11H19V7c0-1.1-.9-2-2-2h-4V3.5C13 2.12 11.88 1 10.5 1S8 2.12 8 3.5V5H4c-1.1 0-1.99.9-1.99 2v3.8H3.5c1.49 0 2.7 1.21 2.7 2.7s-1.21 2.7-2.7 2.7H2V20c0 1.1.9 2 2 2h3.8v-1.5c0-1.49 1.21-2.7 2.7-2.7 1.49 0 2.7 1.21 2.7 2.7V22H17c1.1 0 2-.9 2-2v-4h1.5c1.38 0 2.5-1.12 2.5-2.5S21.88 11 20.5 11z"/></svg>
                 <span>추천 모드</span>
               </button>
             </div>
-            <div class="launcher-header-actions">
-              <!-- Removed WAITING badge -->
+            
+            <div class="sidebar-footer">
+              <button class="sidebar-nav-btn" data-tab="settings">
+                <svg width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.06-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.73 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.06.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .43-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.49-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+                <span>설정</span>
+              </button>
+              <div class="footer-branding">
+                <span class="footer-icon">🌱</span>
+                <span class="footer-text">Stardew Helper v1.0.0</span>
+              </div>
             </div>
-          </div>
+          </aside>
 
           <div class="launcher-content-area">
             <!-- Dashboard Tab -->
             <div class="dashboard-tab-content active" id="tab-dashboard">
               
-              <!-- Dashboard Grid (Visible immediately) -->
+              <!-- Dashboard Grid -->
               <div id="dashboard-grid" class="dashboard-grid">
                 
-                <!-- Main Hub / Farm Overview -->
+                <!-- Main Hub / Farm Overview & Recent Activity -->
                 <div class="dashboard-hub">
+                  <!-- Header -->
                   <div class="hub-header">
-                    <div class="hero-icon">🏡</div>
+                    <div class="farm-image-wrapper">
+                      <img src="https://stardewvalleywiki.com/mediawiki/images/thumb/5/5e/House_%28tier_1%29.png/128px-House_%28tier_1%29.png" alt="Farm House">
+                    </div>
                     <div class="hero-info">
                       <h2 class="farm-name" id="display-farm-name">Waiting for Save Data...</h2>
                       <p class="farm-meta" id="display-farm-meta">Start the game to load your farm</p>
+                      <div class="hub-badges">
+                        <span class="hub-badge" id="display-date-badge">📅 -</span>
+                        <span class="hub-badge" id="display-season-badge">☀️ -</span>
+                      </div>
                     </div>
                   </div>
                   
+                  <!-- 4 Stats Cards -->
                   <div class="hub-stats-grid">
                     <div class="stat-card">
-                      <span class="stat-icon">🪙</span>
-                      <div class="stat-text">
-                        <span class="stat-label">소지금</span>
-                        <span class="stat-value" id="display-farm-gold">0 G</span>
+                      <div class="stat-icon-wrapper">
+                        <span class="stat-icon">💰</span>
                       </div>
+                      <span class="stat-label">소지금</span>
+                      <span class="stat-value" id="display-farm-gold">0 G</span>
+                      <span class="stat-desc">총 보유 골드</span>
                     </div>
                     <div class="stat-card">
-                      <span class="stat-icon">⏱️</span>
-                      <div class="stat-text">
-                        <span class="stat-label">플레이 타임</span>
-                        <span class="stat-value" id="display-play-time">-</span>
+                      <div class="stat-icon-wrapper">
+                        <span class="stat-icon">⏱️</span>
                       </div>
+                      <span class="stat-label">플레이 타임</span>
+                      <span class="stat-value" id="display-play-time">-</span>
+                      <span class="stat-desc">총 플레이 시간</span>
                     </div>
                     <div class="stat-card">
-                      <span class="stat-icon">💾</span>
-                      <div class="stat-text">
-                        <span class="stat-label">최근 저장</span>
-                        <span class="stat-value" id="display-save-date">-</span>
+                      <div class="stat-icon-wrapper">
+                        <span class="stat-icon">💾</span>
                       </div>
+                      <span class="stat-label">최근 저장</span>
+                      <span class="stat-value" id="display-save-date">-</span>
+                      <span class="stat-desc">마지막 저장 시간</span>
                     </div>
                     <div class="stat-card">
-                      <span class="stat-icon">🌱</span>
-                      <div class="stat-text">
-                        <span class="stat-label">현재 계절</span>
-                        <span class="stat-value" id="display-season">-</span>
+                      <div class="stat-icon-wrapper">
+                        <span class="stat-icon">🌱</span>
+                      </div>
+                      <span class="stat-label">현재 계절</span>
+                      <span class="stat-value" id="display-season">-</span>
+                      <span class="stat-desc">현재 게임 계절</span>
+                    </div>
+                  </div>
+
+                  <!-- Recent Activity Area -->
+                  <div class="recent-activity-panel">
+                    <h3 class="panel-title">최근 활동</h3>
+                    <div class="activity-list">
+                      <div class="activity-item">
+                        <span class="activity-icon">💾</span>
+                        <div class="activity-text">
+                          <span class="activity-title">최근 저장</span>
+                          <span class="activity-desc">마지막 저장 시간</span>
+                        </div>
+                        <span class="activity-time" id="activity-save-time">-</span>
+                      </div>
+                      <div class="activity-item">
+                        <span class="activity-icon">🌱</span>
+                        <div class="activity-text">
+                          <span class="activity-title">마지막 게임 감지</span>
+                          <span class="activity-desc">게임 프로세스 감지 시간</span>
+                        </div>
+                        <span class="activity-time" id="activity-game-time">-</span>
+                      </div>
+                      <div class="activity-item">
+                        <span class="activity-icon">🛡️</span>
+                        <div class="activity-text">
+                          <span class="activity-title">SMAPI 버전</span>
+                          <span class="activity-desc">현재 연결된 SMAPI 버전</span>
+                        </div>
+                        <span class="activity-time" id="activity-smapi-ver">-</span>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <!-- Side Panel / Status -->
-                <div class="dashboard-status-panel">
-                  <h3 class="panel-title">시스템 상태</h3>
-                  <div class="system-status-cards">
-                    <div class="status-card disconnected" id="status-game">
-                      <div class="status-indicator"></div>
-                      <div class="status-text">게임 연결</div>
-                    </div>
-                    <div class="status-card disconnected" id="status-smapi">
-                      <div class="status-indicator"></div>
-                      <div class="status-text">SMAPI 연결</div>
-                    </div>
-                    <div class="status-card disconnected" id="status-overlay">
-                      <div class="status-indicator"></div>
-                      <div class="status-text">오버레이 상태</div>
-                    </div>
-                  </div>
-                  
-                  <button class="launch-btn main-action" id="btn-launch-game">
-                    <svg width="24" height="24" viewBox="0 0 24 24" style="margin-right: 8px;"><path fill="currentColor" d="M8 5v14l11-7z"/></svg>
-                    <span>게임 실행하기</span>
-                  </button>
-                </div>
+
 
               </div>
             </div>
 
-            <!-- Hotkey Tab -->
-            <div class="dashboard-tab-content" id="tab-hotkey">
+            <!-- Settings Tab -->
+            <div class="dashboard-tab-content" id="tab-settings">
               <div class="settings-container">
                 <div class="section-header">
-                  <h3>단축키 설정</h3>
-                  <p>게임 내 오버레이 조작 단축키</p>
+                  <h3>설정</h3>
+                  <p>Stardew Helper 기본 설정</p>
                 </div>
                 
-                <div class="settings-list">
-                  <div class="setting-item">
-                    <div class="setting-info">
-                      <h4>오버레이 켜기/끄기</h4>
-                      <p>현재 단축키: <span id="current-hotkey-label">F3</span></p>
+                <div class="settings-group">
+                  <h4 class="settings-group-title">단축키 설정</h4>
+                  <p class="settings-group-desc">게임 내 오버레이 조작 단축키</p>
+                    <div class="settings-list">
+                      <div class="setting-item">
+                        <span class="setting-item-label">오버레이 켜기/끄기</span>
+                        <div class="setting-item-right">
+                          <span id="current-hotkey-label" class="setting-value">Insert</span>
+                          <button class="hotkey-btn" id="btn-hotkey-change">변경</button>
+                        </div>
+                      </div>
+                      <div class="setting-item">
+                        <span class="setting-item-label">스크린샷 촬영</span>
+                        <div class="setting-item-right">
+                          <span class="setting-value">F12</span>
+                          <button class="hotkey-btn">변경</button>
+                        </div>
+                      </div>
+                      <div class="setting-item">
+                        <span class="setting-item-label">UI 숨기기</span>
+                        <div class="setting-item-right">
+                          <span class="setting-value">F4</span>
+                          <button class="hotkey-btn">변경</button>
+                        </div>
+                      </div>
+                      <button class="add-hotkey-btn">+ 단축키 추가</button>
                     </div>
-                    <button class="hotkey-btn" id="btn-hotkey-change">변경</button>
-                  </div>
-                  <!-- Future settings can be easily added here as new .setting-item rows -->
                 </div>
               </div>
             </div>
@@ -157,36 +199,104 @@
                   <p>Stardew Helper와 함께 사용하면 좋은 모드</p>
                 </div>
                 
-                <div class="mods-grid">
+                <div class="mods-list">
                   <div class="mod-card">
-                    <div class="mod-header">
+                    <div class="mod-icon-wrapper">
                       <div class="mod-icon">UI</div>
-                      <div class="mod-title">
-                        <h4>UI Info Suite 2</h4>
-                        <span class="mod-author">Annosz</span>
-                      </div>
                     </div>
-                    <p class="mod-desc">경험치, 행운, NPC 위치 등 필수 UI 정보를 표시합니다.</p>
+                    <div class="mod-info">
+                      <div class="mod-title-row">
+                        <h4>UI Info Suite 2</h4>
+                        <span class="mod-author">by Annosz</span>
+                      </div>
+                      <p class="mod-desc">경험치, 행운, NPC 위치 등 필수 UI 정보를 표시합니다.</p>
+                    </div>
                     <button class="mod-action-btn">다운로드</button>
                   </div>
                   
                   <div class="mod-card">
-                    <div class="mod-header">
+                    <div class="mod-icon-wrapper">
                       <div class="mod-icon">🗺️</div>
-                      <div class="mod-title">
-                        <h4>NPC Map Locations</h4>
-                        <span class="mod-author">Bouhm</span>
-                      </div>
                     </div>
-                    <p class="mod-desc">지도 상에 주민들의 실시간 위치를 표시해 줍니다.</p>
+                    <div class="mod-info">
+                      <div class="mod-title-row">
+                        <h4>NPC Map Locations</h4>
+                        <span class="mod-author">by Bouhm</span>
+                      </div>
+                      <p class="mod-desc">지도 상에 주민들의 실시간 위치를 표시해 줍니다.</p>
+                    </div>
+                    <button class="mod-action-btn">다운로드</button>
+                  </div>
+                  
+                  <div class="mod-card">
+                    <div class="mod-icon-wrapper">
+                      <div class="mod-icon">🔎</div>
+                    </div>
+                    <div class="mod-info">
+                      <div class="mod-title-row">
+                        <h4>Lookup Anything</h4>
+                        <span class="mod-author">by Pathoschild</span>
+                      </div>
+                      <p class="mod-desc">커서를 올리고 F1을 누르면 아이템/캐릭터의 상세 정보를 봅니다.</p>
+                    </div>
+                    <button class="mod-action-btn">다운로드</button>
+                  </div>
+
+                  <div class="mod-card">
+                    <div class="mod-icon-wrapper">
+                      <div class="mod-icon">🚜</div>
+                    </div>
+                    <div class="mod-info">
+                      <div class="mod-title-row">
+                        <h4>Tractor Mod</h4>
+                        <span class="mod-author">by Pathoschild</span>
+                      </div>
+                      <p class="mod-desc">농장 일을 더 빠르고 효율적으로 할 수 있는 트랙터를 추가합니다.</p>
+                    </div>
                     <button class="mod-action-btn">다운로드</button>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+          
+          <!-- Global Right Fixed Panel -->
+          <aside class="launcher-right-panel">
+            <div class="dashboard-status-panel">
+              <h3 class="panel-title">시스템 상태</h3>
+              <div class="system-status-list">
+                <div class="status-item disconnected" id="status-game">
+                  <span class="status-dot">●</span>
+                  <span class="status-text">게임 연결 대기중</span>
+                </div>
+                <div class="status-item disconnected" id="status-smapi">
+                  <span class="status-dot">●</span>
+                  <span class="status-text">SMAPI 연결 대기중</span>
+                </div>
+                <div class="status-item disconnected" id="status-overlay">
+                  <span class="status-dot">●</span>
+                  <span class="status-text">오버레이 상태 대기중</span>
+                </div>
+              </div>
+
+              <div class="system-meta">
+                <div class="meta-item">
+                  <span class="meta-label">최근 저장</span>
+                  <span class="meta-value" id="status-save-time">-</span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-label">마지막 연결</span>
+                  <span class="meta-value" id="status-last-conn">-</span>
+                </div>
+              </div>
+              
+              <button class="launch-btn main-action" id="btn-launch-game">
+                <svg width="24" height="24" viewBox="0 0 24 24" style="margin-right: 8px;"><path fill="currentColor" d="M8 5v14l11-7z"/></svg>
+                <span>게임 실행하기</span>
+              </button>
+            </div>
+          </aside>
         </div>
-      </div>
       </div>
     </div>
     <script type="module" src="app.js"></script>

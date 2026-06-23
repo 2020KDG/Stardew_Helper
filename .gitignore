@@ -42,3 +42,7 @@ client_secret.json
 # C# Mod (StardewHelperMod) Build Outputs
 StardewHelperMod/bin/
 StardewHelperMod/obj/
+
+# Tauri Build Outputs
+src-tauri/target/
+src-tauri/gen/

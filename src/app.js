@@ -24,18 +24,38 @@ window.addEventListener("DOMContentLoaded", async () => {
   const loadingStatusText = document.getElementById('loading-status-text');
   
   // Dashboard Tabs
-  const navItems = document.querySelectorAll('.top-tab-btn');
+  const navItems = document.querySelectorAll('.sidebar-nav-btn');
   const tabContents = document.querySelectorAll('.dashboard-tab-content');
+  const rightPanel = document.querySelector('.launcher-right-panel');
+
+  let tabTransitionTimeout;
 
   navItems.forEach(item => {
     item.addEventListener('click', (e) => {
       e.preventDefault();
+      
+      const targetTab = item.dataset.tab;
+      const targetEl = document.getElementById(`tab-${targetTab}`);
+      
+      if (item.classList.contains('active')) return;
+
+      if (tabTransitionTimeout) clearTimeout(tabTransitionTimeout);
+
       navItems.forEach(nav => nav.classList.remove('active'));
+      item.classList.add('active');
+      
       tabContents.forEach(tab => tab.classList.remove('active'));
       
-      item.classList.add('active');
-      const tabId = `tab-${item.dataset.tab}`;
-      document.getElementById(tabId)?.classList.add('active');
+      if (rightPanel && targetTab !== 'dashboard') {
+        rightPanel.classList.add('collapsed');
+      }
+      
+      tabTransitionTimeout = setTimeout(() => {
+        if (targetEl) targetEl.classList.add('active');
+        if (rightPanel && targetTab === 'dashboard') {
+          rightPanel.classList.remove('collapsed');
+        }
+      }, 250);
     });
   });
 
@@ -44,7 +64,7 @@ window.addEventListener("DOMContentLoaded", async () => {
 
   function updateStatusItem(element, stateClass, text) {
     if (!element) return;
-    element.className = `status-card ${stateClass}`;
+    element.className = `status-item ${stateClass}`;
     const valEl = element.querySelector('.status-text');
     if (valEl) {
       valEl.innerText = text;
@@ -60,9 +80,9 @@ window.addEventListener("DOMContentLoaded", async () => {
     // So we don't have statusSave card anymore on the right side.
     
     if (mode === "None") {
-      updateStatusItem(statusGame, 'waiting', '대기 중 (게임 실행 안 됨)');
-      updateStatusItem(statusSmapi, 'waiting', 'SMAPI 연결 대기 중');
-      updateStatusItem(statusOverlay, 'waiting', '오버레이 연결 대기 중');
+      updateStatusItem(statusGame, 'waiting', '게임 연결 대기중');
+      updateStatusItem(statusSmapi, 'waiting', 'SMAPI 대기중');
+      updateStatusItem(statusOverlay, 'waiting', '오버레이 대기중');
       
       if (launchBtn) {
         launchBtn.className = 'launch-btn main-action';
@@ -70,9 +90,9 @@ window.addEventListener("DOMContentLoaded", async () => {
         launchBtn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" style="margin-right: 8px;"><path fill="currentColor" d="M8 5v14l11-7z"/></svg><span>게임 실행하기</span>';
       }
     } else {
-      updateStatusItem(statusGame, 'good', '🟢 게임 연결됨');
-      updateStatusItem(statusSmapi, mode === "SMAPI" ? 'good' : 'info', mode === "SMAPI" ? '🟢 SMAPI 연결됨' : '🟡 바닐라 모드 실행됨');
-      updateStatusItem(statusOverlay, 'good', '🟢 오버레이 활성화');
+      updateStatusItem(statusGame, 'good', '게임 연결됨');
+      updateStatusItem(statusSmapi, mode === "SMAPI" ? 'good' : 'info', mode === "SMAPI" ? 'SMAPI 연결됨' : '바닐라 모드 실행중');
+      updateStatusItem(statusOverlay, 'good', '오버레이 활성화');
       
       if (launchBtn) {
         launchBtn.className = 'launch-btn main-action connected';
@@ -157,18 +177,19 @@ window.addEventListener("DOMContentLoaded", async () => {
 
   // --- Hotkey Logic ---
   const hotkeyBtn = document.getElementById('btn-hotkey-change');
+  const hotkeyLabel = document.getElementById('current-hotkey-label');
   let isListeningForKey = false;
 
-  if (hotkeyBtn) {
+  if (hotkeyBtn && hotkeyLabel) {
     invoke('get_hotkey').then((currentKey) => {
-      hotkeyBtn.textContent = currentKey || "F3";
+      hotkeyLabel.textContent = currentKey || "Insert";
     });
 
     hotkeyBtn.addEventListener('click', () => {
       if (isListeningForKey) return;
       isListeningForKey = true;
       hotkeyBtn.classList.add('listening');
-      hotkeyBtn.textContent = "입력 대기 중...";
+      hotkeyLabel.textContent = "입력 대기중..";
     });
 
     window.addEventListener('keydown', (e) => {
@@ -177,7 +198,7 @@ window.addEventListener("DOMContentLoaded", async () => {
       
       const keyCode = e.code; // e.g. "F4", "KeyA"
       hotkeyBtn.classList.remove('listening');
-      hotkeyBtn.textContent = keyCode;
+      hotkeyLabel.textContent = keyCode;
       isListeningForKey = false;
 
       invoke('set_hotkey', { newKey: keyCode }).then(() => {
@@ -185,7 +206,7 @@ window.addEventListener("DOMContentLoaded", async () => {
         setTimeout(() => hotkeyBtn.classList.remove('saved'), 1000);
       }).catch(err => {
         console.error("Failed to set hotkey", err);
-        hotkeyBtn.textContent = "Error";
+        hotkeyLabel.textContent = "Error";
       });
     });
   }
