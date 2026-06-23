@@ -604,15 +604,15 @@ function renderFish(season, loc) {
   const evalScoreText = locData.find(f => f.evalScore && f.evalScore !== '-')?.evalScore || null;
   let evalScoreHtml = '';
   if (evalScoreText) {
-    evalScoreHtml = \`
+    evalScoreHtml = `
       <div style="margin-bottom: 15px; padding: 15px 20px; background: linear-gradient(135deg, rgba(255,255,255,0.7), rgba(255,255,255,0.4)); border-left: 4px solid #d35400; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); color: #5d3d19; font-size: 0.95rem;">
-        <div style="font-weight: bold; color: #d35400; margin-bottom: 6px; font-size: 1.05rem;">📌 \${season} 계절 \${loc} 지형 수익성</div>
-        <div style="white-space: pre-wrap; line-height: 1.5; font-weight: 500;">\${evalScoreText}</div>
+        <div style="font-weight: bold; color: #d35400; margin-bottom: 6px; font-size: 1.05rem;">📌 ${season} 계절 ${loc} 지형 수익성</div>
+        <div style="white-space: pre-wrap; line-height: 1.5; font-weight: 500;">${evalScoreText}</div>
       </div>
-    \`;
+    `;
   }
 
-  tableContainer.innerHTML = evalScoreHtml + \`
+  tableContainer.innerHTML = evalScoreHtml + `
     <table class="data-table">
       <thead>
         <tr>
