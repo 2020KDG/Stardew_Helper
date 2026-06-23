@@ -1,0 +1,29 @@
+name: Lint and Check
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  check:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy, rustfmt
+          
+      - name: Cargo Check
+        run: cargo check
+        working-directory: ./src-tauri
+        
+      - name: Cargo Format
+        run: cargo fmt -- --check
+        working-directory: ./src-tauri
+        
+      - name: Cargo Clippy
+        run: cargo clippy -- -D warnings
+        working-directory: ./src-tauri

@@ -1,0 +1,55 @@
+name: Release
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: [windows-latest]
+    runs-on: ${{ matrix.platform }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Set up Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: x86_64-pc-windows-msvc
+
+      - name: Determine Release Tag
+        id: tag
+        run: |
+          if ("${{ github.ref }}" -like "refs/tags/*") {
+            $tag = "${{ github.ref_name }}"
+            echo "IS_PRE_RELEASE=false" >> $env:GITHUB_OUTPUT
+          } else {
+            $tag = "Test_version"
+            echo "IS_PRE_RELEASE=true" >> $env:GITHUB_OUTPUT
+          }
+          echo "TAG_NAME=$tag" >> $env:GITHUB_OUTPUT
+
+      - name: Build and Release Tauri App
+        uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tagName: ${{ steps.tag.outputs.TAG_NAME }}
+          releaseName: 'Stardew Helper ${{ steps.tag.outputs.TAG_NAME }}'
+          releaseBody: '자동으로 빌드된 릴리즈 설치 파일입니다.'
+          releaseDraft: false
+          prerelease: ${{ steps.tag.outputs.IS_PRE_RELEASE == 'true' }}
