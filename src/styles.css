@@ -154,15 +154,18 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .dashboard-board {
-  width: 92vw;
+  width: 96vw;
   height: 88vh;
-  max-width: 1400px;
+  max-width: 1800px;
   display: flex;
   flex-direction: row;
   overflow: hidden;
+  background: var(--sdv-bg-main);
+  border: 4px solid var(--sdv-border);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
 
-/* Sidebar: Reduced width */
 .dashboard-sidebar {
   width: 240px;
   min-width: 240px;
@@ -172,6 +175,7 @@ h1, h2, h3, h4, h5, h6 {
   flex-direction: column;
   background: rgba(255, 255, 255, 0.25);
   overflow: hidden;
+  min-height: 0;
 }
 
 .dashboard-main {
@@ -1507,11 +1511,6 @@ h1, h2, h3, h4, h5, h6 {
   z-index: 10;
 }
 
-.sidebar-nav {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
 
 .sidebar-nav-btn {
   background: transparent;

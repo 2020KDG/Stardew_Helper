@@ -458,7 +458,7 @@ function renderCrops(season) {
   const titleEl = document.getElementById("crops-header-title");
   if (!cropsListEl || !cropsData) return;
 
-  titleEl.textContent = `작물 정보 (${season})`;
+  titleEl.innerHTML = `작물 정보 (${season})`;
   cropsListEl.innerHTML = '';
 
   const seasonData = cropsData[season] || [];
@@ -474,12 +474,27 @@ function renderCrops(season) {
   seasonData.forEach(crop => {
     rowsHtml += `
       <tr>
-        <td class="col-name"><span style="font-size:1.2rem;">${crop.icon}</span> ${crop.name}</td>
+        <td class="col-name"><span style="font-size:1.2rem;">${crop.icon}</span> <strong>${crop.name}</strong></td>
         <td>${crop.type || '-'}</td>
         <td>${crop.isMulti || '-'}</td>
-        <td>${crop.growth || '-'}</td>
+        <td>
+          <div><strong>기본:</strong> ${crop.growthBase || '-'}</div>
+          <div style="font-size:0.8rem; color:#666;">성촉: ${crop.growthSpeedGro || '-'} | 디성촉: ${crop.growthDeluxe || '-'} | 하성촉: ${crop.growthHyper || '-'}</div>
+        </td>
+        <td>
+          <div><strong>기본:</strong> ${crop.agBase || '-'}</div>
+          <div style="font-size:0.8rem; color:#666;">성촉: ${crop.agSpeedGro || '-'} | 디성촉: ${crop.agDeluxe || '-'} | 하성촉: ${crop.agHyper || '-'}</div>
+        </td>
+        <td>${crop.exp || '-'}</td>
         <td>${crop.seedPrice || '-'}</td>
-        <td>${crop.sellPrice || '-'}</td>
+        <td>
+          <div style="color:#5d3d19;"><strong>${crop.sellBase || '-'}</strong></div>
+          <div style="font-size:0.8rem;">⭐ ${crop.sellSilver || '-'} | 🌟 ${crop.sellGold || '-'}</div>
+        </td>
+        <td>${crop.gpd || '-'}</td>
+        <td style="white-space:pre-wrap;">${crop.epg || '-'}</td>
+        <td style="text-align:left; max-width: 200px; word-wrap: break-word; white-space:pre-wrap;">${crop.notes || '-'}</td>
+        <td style="text-align:left; max-width: 200px; word-wrap: break-word; font-weight:bold; color:#d35400;">${crop.evalScore || '-'}</td>
       </tr>
     `;
   });
@@ -491,9 +506,15 @@ function renderCrops(season) {
           <th style="text-align:left;">작물</th>
           <th>종류</th>
           <th>다수확</th>
-          <th>성장 기간</th>
+          <th>성장기간(기본)</th>
+          <th>성장기간(농업전문)</th>
+          <th>경험치</th>
           <th>씨앗 가격</th>
-          <th>판매가</th>
+          <th>판매가(기본/은/금)</th>
+          <th>GPD</th>
+          <th>EPG</th>
+          <th style="text-align:left;">특이사항</th>
+          <th style="text-align:left;">평가</th>
         </tr>
       </thead>
       <tbody>
@@ -510,7 +531,7 @@ function renderFish(season, loc) {
   const titleEl = document.getElementById("fish-header-title");
   if (!fishListEl || !fishData) return;
 
-  titleEl.textContent = `물고기 정보 (${season} - ${loc})`;
+  titleEl.innerHTML = `물고기 정보 (${season} - ${loc}) <span style="font-size:0.8rem; color:#2e7d32; font-weight:normal; margin-left:10px;">[번들 아이템은 초록색 굵은 글씨로 표시됩니다]</span>`;
   fishListEl.innerHTML = '';
 
   const seasonData = fishData[season] || {};
@@ -527,17 +548,33 @@ function renderFish(season, loc) {
   let rowsHtml = '';
   locData.forEach(fish => {
     // Process bundle note
-    let formattedNote = fish.note || '-';
+    let formattedNote = fish.notes || '-';
+    let isBundle = false;
     if (formattedNote.includes('[B]')) {
-      formattedNote = formattedNote.replace(/\[B\]/g, '<span class="bundle-highlight">[번들]</span>');
+      isBundle = true;
+      formattedNote = formattedNote.replace(/\[B\]/g, '').trim();
+      if (!formattedNote) formattedNote = '-';
+    }
+
+    let nameHtml = `<strong>${fish.name}</strong>`;
+    if (isBundle) {
+      nameHtml = `<strong class="bundle-highlight">${fish.name}</strong>`;
     }
 
     rowsHtml += `
       <tr>
-        <td class="col-name"><span style="font-size:1.2rem;">${fish.icon}</span> ${fish.name}</td>
+        <td class="col-name"><span style="font-size:1.2rem;">${fish.icon}</span> ${nameHtml}</td>
         <td>${fish.time || '-'}</td>
-        <td>${fish.sellPrice || '-'}</td>
-        <td style="text-align:left; max-width: 300px; word-wrap: break-word;">${formattedNote}</td>
+        <td>${fish.exp || '-'}</td>
+        <td>
+          <div style="color:#5d3d19;"><strong>기본: ${fish.sellBase || '-'}</strong></div>
+          <div style="font-size:0.8rem; color:#666;">이리듐: ${fish.sellIridium || '-'}</div>
+          <div style="font-size:0.8rem; color:#666;">이리듐+앵글러: ${fish.sellAngler || '-'}</div>
+        </td>
+        <td style="white-space:pre-wrap;">${fish.epg || '-'}</td>
+        <td style="text-align:left; max-width: 200px; word-wrap: break-word; white-space:pre-wrap;">${formattedNote}</td>
+        <td style="white-space:pre-wrap;">${fish.diff || '-'}</td>
+        <td style="text-align:left; max-width: 200px; word-wrap: break-word; font-weight:bold; color:#d35400;">${fish.evalScore || '-'}</td>
       </tr>
     `;
   });
@@ -548,8 +585,12 @@ function renderFish(season, loc) {
         <tr>
           <th style="text-align:left;">물고기</th>
           <th>출현 시간</th>
-          <th>기본 판매가</th>
+          <th>경험치</th>
+          <th>판매가(기본/이리듐/앵글러)</th>
+          <th>EPG</th>
           <th style="text-align:left;">특이사항</th>
+          <th>난이도</th>
+          <th style="text-align:left;">평가</th>
         </tr>
       </thead>
       <tbody>
