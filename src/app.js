@@ -20,6 +20,28 @@ window.addEventListener("DOMContentLoaded", async () => {
     invoke('start_dragging');
   });
 
+  // --- Auto Updater ---
+  async function checkForUpdates() {
+    try {
+      const update = await invoke('plugin:updater|check');
+      if (update && update.available) {
+        if (confirm(`✨ 새로운 버전(${update.version})이 출시되었습니다!\n지금 바로 업데이트를 설치하고 다시 시작하시겠습니까?`)) {
+          // Show updating UI
+          const loadingStatusText = document.getElementById('loading-status-text');
+          if (loadingStatusText) {
+            loadingStatusText.textContent = "업데이트를 다운로드 중입니다...";
+            document.getElementById('loading-overlay').classList.add('active');
+          }
+          await invoke('plugin:updater|download_and_install', { onEvent: null });
+          await invoke('plugin:process|relaunch');
+        }
+      }
+    } catch (e) {
+      console.error("Auto-updater failed:", e);
+    }
+  }
+  checkForUpdates();
+
   // --- Views & UI Elements ---
   const loadingStatusText = document.getElementById('loading-status-text');
   

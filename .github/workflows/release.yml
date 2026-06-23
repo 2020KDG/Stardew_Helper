@@ -47,9 +47,36 @@ jobs:
         uses: tauri-apps/tauri-action@v0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAURI_PRIVATE_KEY: ${{ secrets.TAURI_PRIVATE_KEY }}
         with:
           tagName: ${{ steps.tag.outputs.TAG_NAME }}
           releaseName: 'Stardew Helper ${{ steps.tag.outputs.TAG_NAME }}'
           releaseBody: '자동으로 빌드된 릴리즈 설치 파일입니다.'
           releaseDraft: false
           prerelease: ${{ steps.tag.outputs.IS_PRE_RELEASE == 'true' }}
+
+      - name: Generate and Upload updater.json
+        if: steps.tag.outputs.IS_PRE_RELEASE == 'false'
+        run: |
+          $version = "${{ steps.tag.outputs.TAG_NAME }}".TrimStart('v')
+          $sigPath = "src-tauri/target/release/bundle/nsis/Stardew Helper_${version}_x64-setup.nsis.zip.sig"
+          if (Test-Path $sigPath) {
+            $signature = Get-Content $sigPath -Raw
+            $json = @{
+              version = $version
+              notes = "✨ 새로운 버전 업데이트가 가능합니다."
+              pub_date = (Get-Date).ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")
+              platforms = @{
+                "windows-x86_64" = @{
+                  signature = $signature.Trim()
+                  url = "https://github.com/${{ github.repository }}/releases/download/${{ steps.tag.outputs.TAG_NAME }}/Stardew%20Helper_${version}_x64-setup.nsis.zip"
+                }
+              }
+            }
+            $json | ConvertTo-Json -Depth 5 | Set-Content updater.json
+            gh release upload ${{ steps.tag.outputs.TAG_NAME }} updater.json --clobber
+          } else {
+            Write-Host "Signature file not found: $sigPath"
+          }
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
