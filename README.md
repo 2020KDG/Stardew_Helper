@@ -43,3 +43,4 @@ Stardew Helper는 스타듀밸리(Stardew Valley)를 더욱 쾌적하게 즐길 
 이 프로젝트는 개인적인 용도로 개발되었으며, 스타듀밸리(Stardew Valley)의 공식 소프트웨어가 아닙니다. 스타듀밸리 게임 및 에셋의 모든 저작권은 ConcernedApe에 있습니다.
 
 
+
