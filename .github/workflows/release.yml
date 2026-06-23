@@ -51,7 +51,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_PRIVATE_KEY }}
-          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ""
+          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: "stardew_updater_pwd_123"
         with:
           tagName: ${{ steps.tag.outputs.TAG_NAME }}
           releaseName: 'Stardew Helper ${{ steps.tag.outputs.TAG_NAME }}'
