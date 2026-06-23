@@ -863,9 +863,6 @@ h1, h2, h3, h4, h5, h6 {
 .data-table .col-name {
   text-align: left;
   font-family: 'Pretendard-SemiBold', sans-serif;
-  display: flex;
-  align-items: center;
-  gap: 8px;
   white-space: nowrap;
 }
 

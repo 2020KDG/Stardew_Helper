@@ -474,7 +474,7 @@ function renderCrops(season) {
   seasonData.forEach(crop => {
     rowsHtml += `
       <tr>
-        <td class="col-name"><span style="font-size:1.2rem;">${crop.icon}</span> <strong>${crop.name}</strong></td>
+        <td class="col-name"><div style="display:flex; align-items:center; gap:8px;"><span style="font-size:1.2rem;">${crop.icon}</span> <strong>${crop.name}</strong></div></td>
         <td>${crop.type || '-'}</td>
         <td>${crop.isMulti || '-'}</td>
         <td>
@@ -499,7 +499,7 @@ function renderCrops(season) {
     `;
   });
 
-  const evalScoreText = locData.find(c => c.evalScore && c.evalScore !== '-')?.evalScore || null;
+  const evalScoreText = seasonData.find(c => c.evalScore && c.evalScore !== '-')?.evalScore || null;
   let evalScoreHtml = '';
   if (evalScoreText) {
     evalScoreHtml = `<div style="margin-bottom: 10px; padding: 15px; background-color: #fce8cd; border: 1px solid #d35400; border-radius: 5px; color: #d35400; font-weight: bold; white-space: pre-wrap; line-height: 1.4;">해당지역 수익성:<br>${evalScoreText}</div>`;
@@ -591,7 +591,7 @@ function renderFish(season, loc) {
 
     rowsHtml += `
       <tr>
-        <td class="col-name"><span style="font-size:1.2rem;">${fish.icon}</span> ${nameHtml}</td>
+        <td class="col-name"><div style="display:flex; align-items:center; gap:8px;"><span style="font-size:1.2rem;">${fish.icon}</span> ${nameHtml}</div></td>
         <td>${fish.time || '-'}</td>
         <td>${fish.exp || '-'}</td>
         <td>
