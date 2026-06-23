@@ -1,5 +1,5 @@
 use crate::save_parser::{get_latest_save_file, parse_save_file};
-use notify::{RecursiveMode, Result as NotifyResult, Watcher};
+use notify::{RecursiveMode, Watcher};
 use std::path::PathBuf;
 use std::sync::mpsc::channel;
 use std::time::Duration;

@@ -17,14 +17,11 @@ pub fn start_server(app_handle: tauri::AppHandle) {
                 if let Ok(mut ws_stream) = accept_async(stream).await {
                     println!("SMAPI Mod connected to WebSocket!");
                     while let Some(msg) = ws_stream.next().await {
-                        match msg {
-                            Ok(tokio_tungstenite::tungstenite::Message::Text(text)) => {
-                                // Parse string as JSON and emit to frontend
-                                if let Ok(json) = serde_json::from_str::<serde_json::Value>(&text) {
-                                    let _ = app_handle_clone.emit("save-updated", json);
-                                }
+                        if let Ok(tokio_tungstenite::tungstenite::Message::Text(text)) = msg {
+                            // Parse string as JSON and emit to frontend
+                            if let Ok(json) = serde_json::from_str::<serde_json::Value>(&text) {
+                                let _ = app_handle_clone.emit("save-updated", json);
                             }
-                            _ => {}
                         }
                     }
                     println!("SMAPI Mod disconnected.");

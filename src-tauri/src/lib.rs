@@ -9,7 +9,7 @@ fn greet(name: &str) -> String {
 }
 
 #[tauri::command]
-fn trigger_manual_refresh(app_handle: tauri::AppHandle) -> Result<save_parser::SaveData, String> {
+fn trigger_manual_refresh(_app_handle: tauri::AppHandle) -> Result<save_parser::SaveData, String> {
     println!("Manual refresh triggered by frontend.");
     match save_parser::get_latest_save_file() {
         Some(latest) => {
@@ -74,17 +74,13 @@ fn install_smapi_mod(
     }
 
     let mods_path = game_path.join("Mods");
-    if !mods_path.exists() {
-        if let Err(_) = std::fs::create_dir_all(&mods_path) {
-            return Err("Mods 폴더를 생성할 수 없습니다.".to_string());
-        }
+    if !mods_path.exists() && std::fs::create_dir_all(&mods_path).is_err() {
+        return Err("Mods 폴더를 생성할 수 없습니다.".to_string());
     }
 
     let dest_mod_path = mods_path.join("StardewHelperMod");
-    if !dest_mod_path.exists() {
-        if let Err(_) = std::fs::create_dir_all(&dest_mod_path) {
-            return Err("StardewHelperMod 폴더를 생성할 수 없습니다.".to_string());
-        }
+    if !dest_mod_path.exists() && std::fs::create_dir_all(&dest_mod_path).is_err() {
+        return Err("StardewHelperMod 폴더를 생성할 수 없습니다.".to_string());
     }
 
     let resource_path = app
