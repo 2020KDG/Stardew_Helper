@@ -19,6 +19,14 @@
   --sdv-border-soft: var(--sdv-border);
   --sdv-text-dark: var(--sdv-text-primary);
   --sdv-text-brown: var(--sdv-text-secondary);
+  
+  /* Restored Legacy Variables for Overlay */
+  --sdv-bg: #f5e3b3;
+  --sdv-bg-light: #fef0cd;
+  --sdv-border-light: #ffebbc;
+  --sdv-border-dark: #5d3d19;
+  --sdv-accent-gold: #c28828;
+  --glass-shadow: 0 16px 40px 0 rgba(0, 0, 0, 0.4);
 
   /* Shadows */
   --card-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
@@ -1724,8 +1732,37 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 2px;
 }
 
-.launch-btn {
+.ad-container-sidebar {
+  background: var(--sdv-bg-window);
+  border: 1px dashed var(--sdv-border);
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   margin-top: auto;
+  margin-bottom: 12px;
+  min-height: 80px;
+}
+
+.ad-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--sdv-text-secondary);
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+
+.ad-text {
+  font-size: 0.8rem;
+  color: var(--sdv-text-secondary);
+  opacity: 0.7;
+  margin: 0;
+}
+
+.launch-btn {
   padding: 16px;
   border: none;
   background: var(--sdv-point-green);
@@ -1771,10 +1808,41 @@ h1, h2, h3, h4, h5, h6 {
 ========================================= */
 .settings-container {
   max-width: 800px;
-  margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: var(--sp-24);
+  padding: 0 16px;
+}
+
+.settings-group {
+  margin-bottom: 40px;
+}
+
+.settings-group-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding-left: 4px;
+}
+
+.settings-group-header-text {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.settings-group-title {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--sdv-text-primary);
+}
+
+.settings-group-desc {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--sdv-text-secondary);
 }
 
 .settings-list {
@@ -1793,6 +1861,8 @@ h1, h2, h3, h4, h5, h6 {
   padding: 16px 24px;
   box-shadow: var(--card-shadow);
   transition: transform 0.2s, box-shadow 0.2s;
+  width: 100%;
+  max-width: 600px;
 }
 
 .setting-item:hover {
@@ -1854,6 +1924,7 @@ h1, h2, h3, h4, h5, h6 {
   cursor: pointer;
   transition: all 0.2s ease;
   width: 100%;
+  max-width: 600px;
 }
 
 .add-hotkey-btn:hover {

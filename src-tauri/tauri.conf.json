@@ -1,8 +1,8 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "tauri-app",
-  "version": "0.1.0",
-  "identifier": "com.stardew.overlay",
+  "productName": "Stardew Helper",
+  "version": "1.0.0",
+  "identifier": "stardew.helper",
   "build": {
     "frontendDist": "../src"
   },
