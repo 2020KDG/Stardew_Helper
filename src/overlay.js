@@ -479,7 +479,7 @@ function renderCrops(season) {
         <td>${crop.isMulti || '-'}</td>
         <td>
           <div style="font-weight:600;">기본: ${crop.growthBase || '-'}</div>
-          <div class="item-badge-container" style="justify-content:center;">
+          <div class="item-badge-container">
             <span class="item-badge">성촉: ${crop.growthSpeedGro || '-'}</span>
             <span class="item-badge">디성촉: ${crop.growthDeluxe || '-'}</span>
             <span class="item-badge">하성촉: ${crop.growthHyper || '-'}</span>
@@ -487,7 +487,7 @@ function renderCrops(season) {
         </td>
         <td>
           <div style="font-weight:600;">기본: ${crop.agBase || '-'}</div>
-          <div class="item-badge-container" style="justify-content:center;">
+          <div class="item-badge-container">
             <span class="item-badge">성촉: ${crop.agSpeedGro || '-'}</span>
             <span class="item-badge">디성촉: ${crop.agDeluxe || '-'}</span>
             <span class="item-badge">하성촉: ${crop.agHyper || '-'}</span>
@@ -497,15 +497,15 @@ function renderCrops(season) {
         <td>${crop.seedPrice || '-'}</td>
         <td>
           <div style="color:#5d3d19; font-weight:600;">기본: ${crop.sellBase || '-'}</div>
-          <div class="item-badge-container" style="justify-content:center;">
+          <div class="item-badge-container">
             <span class="item-badge silver">은: ${crop.sellSilver || '-'}</span>
             <span class="item-badge gold">금: ${crop.sellGold || '-'}</span>
           </div>
         </td>
         <td>${crop.gpd || '-'}</td>
         <td style="white-space:pre-wrap;">${crop.epg || '-'}</td>
-        <td style="text-align:left; word-wrap: break-word; white-space:pre-wrap; line-height:1.5;">${crop.notes || '-'}</td>
-        <td style="text-align:left; word-wrap: break-word; font-weight:bold; color:#d35400; line-height:1.5;">${crop.evalScore || '-'}</td>
+        <td style="text-align:left; word-wrap: break-word; white-space:pre-wrap; line-height:1.5; font-size:0.85rem;">${crop.notes || '-'}</td>
+        <td style="text-align:left; word-wrap: break-word; font-weight:bold; color:#d35400; line-height:1.5; font-size:0.85rem;">${crop.evalScore || '-'}</td>
       </tr>
     `;
   });
@@ -601,13 +601,13 @@ function renderFish(season, loc) {
         <td>${fish.exp || '-'}</td>
         <td>
           <div style="color:#5d3d19; font-weight:600;">기본: ${fish.sellBase || '-'}</div>
-          <div class="item-badge-container" style="justify-content:center;">
+          <div class="item-badge-container">
             <span class="item-badge iridium">이리듐: ${fish.sellIridium || '-'}</span>
-            <span class="item-badge iridium">앵글러: ${fish.sellAngler || '-'}</span>
+            <span class="item-badge mythic">낚시장인+이리듐: ${fish.sellAngler || '-'}</span>
           </div>
         </td>
         <td style="white-space:pre-wrap;">${fish.epg || '-'}</td>
-        <td style="text-align:left; word-wrap: break-word; white-space:pre-wrap; line-height:1.5;">${formattedNote}</td>
+        <td style="text-align:left; word-wrap: break-word; white-space:pre-wrap; line-height:1.5; font-size:0.85rem;">${formattedNote}</td>
         <td style="white-space:pre-wrap;">${fish.diff || '-'}</td>
 
       </tr>
