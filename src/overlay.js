@@ -644,27 +644,7 @@ window.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  const installModBtn = document.getElementById("install-mod-btn");
-  if (installModBtn) {
-    installModBtn.addEventListener("click", async () => {
-      try {
-        const result = await invoke("install_smapi_mod");
-        installModBtn.className = "action-btn success";
-        installModBtn.innerText = "✅ " + result;
-        setTimeout(() => {
-          installModBtn.className = "action-btn";
-          installModBtn.innerText = "🚀 SMAPI 모드 원클릭 설치";
-        }, 3000);
-      } catch (e) {
-        installModBtn.className = "action-btn error";
-        installModBtn.innerText = "❌ " + e;
-        setTimeout(() => {
-          installModBtn.className = "action-btn";
-          installModBtn.innerText = "🚀 SMAPI 모드 원클릭 설치";
-        }, 5000);
-      }
-    });
-  }
+
 
   listen("game-state-changed", (event) => {
     const mode = event.payload;

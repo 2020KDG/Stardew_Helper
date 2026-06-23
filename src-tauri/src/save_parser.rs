@@ -1,10 +1,8 @@
-
-
-use serde::{Deserialize, Serialize};
-use std::path::PathBuf;
-use std::fs;
 use quick_xml::events::Event;
 use quick_xml::Reader;
+use serde::{Deserialize, Serialize};
+use std::fs;
+use std::path::PathBuf;
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct SaveData {
@@ -26,13 +24,13 @@ pub struct SaveData {
     pub mail_received: Vec<String>,
     pub friendship_five_hearts: i32,
     pub friendship_ten_hearts: i32,
-    
+
     // 2차 대규모 확장 (Ultimate Expansion)
     pub gender: String,
     pub favorite_thing: String,
     pub spouse: String,
     pub children_count: i32,
-    
+
     pub max_health: i32,
     pub max_stamina: i32,
     pub farming_level: i32,
@@ -45,14 +43,14 @@ pub struct SaveData {
     pub days_played: i32,
     pub time_played: String, // 혹은 i32(분)로 저장하고 프론트에서 파싱
     pub daily_luck: f64,
-    
+
     pub has_rusty_key: bool,
     pub has_skull_key: bool,
     pub has_club_card: bool,
     pub has_dark_talisman: bool,
     pub has_magic_ink: bool,
     pub has_town_key: bool,
-    
+
     // 단순 카운트가 아닌 진짜 컬렉션 수집을 원한다면 나중에 Vec이나 HashMap 가능. 일단은 확장 대비.
     pub minerals_found: i32,
     pub archaeology_found: i32,
@@ -63,7 +61,7 @@ pub struct SaveData {
 pub fn get_latest_save_file() -> Option<PathBuf> {
     let app_data = std::env::var("APPDATA").ok()?;
     let saves_dir = PathBuf::from(app_data).join("StardewValley").join("Saves");
-    
+
     if !saves_dir.exists() {
         return None;
     }
@@ -102,7 +100,7 @@ pub fn get_latest_save_file() -> Option<PathBuf> {
 
 pub fn parse_save_file(path: &PathBuf) -> Result<SaveData, String> {
     let xml = fs::read_to_string(path).map_err(|e| e.to_string())?;
-    
+
     let mut player_name = String::new();
     let mut farm_name = String::new();
     let mut money = 0;
@@ -129,7 +127,7 @@ pub fn parse_save_file(path: &PathBuf) -> Result<SaveData, String> {
 
     let mut current_tag = String::new();
     let mut buf = Vec::new();
-    
+
     // New Tracking Variables
     let mut in_stats = false;
     let mut in_museum = false;
@@ -138,7 +136,7 @@ pub fn parse_save_file(path: &PathBuf) -> Result<SaveData, String> {
     let mut in_recipes_cooked = false;
     let mut in_crafting_recipes = false;
     let mut in_friendship_points = false;
-    
+
     let mut museum_pieces = 0;
     let mut quests_completed = 0;
     let mut fish_caught = 0;
@@ -147,13 +145,13 @@ pub fn parse_save_file(path: &PathBuf) -> Result<SaveData, String> {
     let mut mail_received = Vec::new();
     let mut friendship_five_hearts = 0;
     let mut friendship_ten_hearts = 0;
-    
+
     // 2nd Expansion
     let mut gender = String::new();
     let mut favorite_thing = String::new();
     let mut spouse = String::new();
     let mut children_count = 0;
-    
+
     let mut max_health = 0;
     let mut max_stamina = 0;
     let mut farming_level = 0;
@@ -162,29 +160,29 @@ pub fn parse_save_file(path: &PathBuf) -> Result<SaveData, String> {
     let mut foraging_level = 0;
     let mut fishing_level = 0;
     let mut luck_level = 0;
-    
+
     let mut days_played = 0;
     let mut time_played = String::new();
     let mut daily_luck = 0.0;
-    
+
     let mut has_rusty_key = false;
     let mut has_skull_key = false;
     let mut has_club_card = false;
     let mut has_dark_talisman = false;
     let mut has_magic_ink = false;
     let mut has_town_key = false;
-    
+
     let mut in_minerals_found = false;
     let mut in_archaeology_found = false;
     let mut in_basic_shipped = false;
-    
+
     let mut specific_monsters_killed = std::collections::HashMap::new();
     let mut in_specific_monsters_killed = false;
     let mut in_smk_item = false;
     let mut in_smk_key = false;
     let mut in_smk_value = false;
     let mut current_smk_key = String::new();
-    
+
     let mut minerals_found = 0;
     let mut archaeology_found = 0;
     let mut basic_shipped = 0;
@@ -250,7 +248,7 @@ pub fn parse_save_file(path: &PathBuf) -> Result<SaveData, String> {
                 } else if in_friendship && name == "Points" {
                     in_friendship_points = true;
                 }
-            },
+            }
             Ok(Event::End(ref e)) => {
                 let name = String::from_utf8_lossy(e.name().as_ref()).to_string();
                 if name == "player" {
@@ -298,7 +296,7 @@ pub fn parse_save_file(path: &PathBuf) -> Result<SaveData, String> {
                     in_friendship_points = false;
                 }
                 current_tag.clear();
-            },
+            }
             Ok(Event::Text(e)) => {
                 let text = String::from_utf8_lossy(e.as_ref()).to_string();
                 if in_achievements {
@@ -410,7 +408,7 @@ pub fn parse_save_file(path: &PathBuf) -> Result<SaveData, String> {
                         year = text.parse().unwrap_or(0);
                     }
                 }
-            },
+            }
             Ok(Event::Eof) => break,
             Err(_) => break,
             _ => (),
@@ -437,7 +435,7 @@ pub fn parse_save_file(path: &PathBuf) -> Result<SaveData, String> {
         mail_received,
         friendship_five_hearts,
         friendship_ten_hearts,
-        
+
         gender,
         favorite_thing,
         spouse,

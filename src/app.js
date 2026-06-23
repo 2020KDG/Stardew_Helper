@@ -131,6 +131,43 @@ window.addEventListener("DOMContentLoaded", async () => {
     updateStatusIndicators(mode);
   });
 
+  listen("recommend-mod-install", () => {
+    const toast = document.createElement("div");
+    toast.style.position = "fixed";
+    toast.style.bottom = "30px";
+    toast.style.left = "50%";
+    toast.style.transform = "translateX(-50%)";
+    toast.style.background = "rgba(255, 243, 205, 0.95)";
+    toast.style.color = "#856404";
+    toast.style.padding = "16px 24px";
+    toast.style.borderRadius = "12px";
+    toast.style.boxShadow = "0 8px 24px rgba(0,0,0,0.15)";
+    toast.style.zIndex = "9999";
+    toast.style.fontSize = "14px";
+    toast.style.fontWeight = "500";
+    toast.style.maxWidth = "400px";
+    toast.style.lineHeight = "1.5";
+    toast.style.border = "1px solid #ffeeba";
+    toast.style.transition = "opacity 0.4s ease, bottom 0.4s ease";
+    toast.style.backdropFilter = "blur(10px)";
+    
+    toast.innerHTML = `
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:4px;">
+        <svg width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+        <strong style="font-size:15px;">모드 설치 권장</strong>
+      </div>
+      스타듀밸리가 실행 중이지만 <b>스타듀헬퍼 모드</b>가 없습니다.<br>실시간 연동을 위해 우측 하단의 [모드 설치] 버튼을 눌러주세요!
+    `;
+    
+    document.body.appendChild(toast);
+    
+    setTimeout(() => {
+      toast.style.opacity = "0";
+      toast.style.bottom = "10px";
+      setTimeout(() => toast.remove(), 400);
+    }, 8000);
+  });
+
   // --- Save Data Listener ---
   const displayFarmName = document.getElementById('display-farm-name');
   const displayFarmMeta = document.getElementById('display-farm-meta');
@@ -175,16 +212,67 @@ window.addEventListener("DOMContentLoaded", async () => {
     }
   });
 
-  // --- Hotkey Logic ---
+  // --- Config & Settings Logic ---
   const hotkeyBtn = document.getElementById('btn-hotkey-change');
   const hotkeyLabel = document.getElementById('current-hotkey-label');
+  const inputGamePath = document.getElementById('input-game-path');
+  const btnBrowsePath = document.getElementById('btn-browse-path');
+  
+  let appConfig = { hotkey: "Insert", game_path: "" };
   let isListeningForKey = false;
 
-  if (hotkeyBtn && hotkeyLabel) {
-    invoke('get_hotkey').then((currentKey) => {
-      hotkeyLabel.textContent = currentKey || "Insert";
-    });
+  async function loadConfig() {
+    try {
+      appConfig = await invoke('get_config');
+      if (hotkeyLabel) hotkeyLabel.textContent = appConfig.hotkey || "Insert";
+      if (inputGamePath) inputGamePath.value = appConfig.game_path || "";
+      updateLaunchModeUI(appConfig.launch_mode || "Vanilla");
+      await checkModInstalled();
+    } catch (err) {
+      console.error("Failed to load config:", err);
+    }
+  }
 
+  async function saveConfig() {
+    try {
+      await invoke('save_config', { newConfig: appConfig });
+    } catch (err) {
+      console.error("Failed to save config:", err);
+      throw err;
+    }
+  }
+
+  loadConfig();
+
+  // --- Launch Mode Toggle ---
+  const modeToggle = document.getElementById("launch-mode-toggle");
+  const modeThumb = document.getElementById("launch-mode-thumb");
+  const labelVanilla = document.getElementById("label-mode-vanilla");
+  const labelSmapi = document.getElementById("label-mode-smapi");
+
+  function updateLaunchModeUI(mode) {
+    if (mode === "SMAPI") {
+      if (modeThumb) modeThumb.style.transform = "translateX(18px)";
+      if (modeToggle) modeToggle.style.background = "#2ecc71";
+      if (labelVanilla) { labelVanilla.style.fontWeight = "500"; labelVanilla.style.opacity = "0.5"; }
+      if (labelSmapi) { labelSmapi.style.fontWeight = "600"; labelSmapi.style.opacity = "1"; }
+    } else {
+      if (modeThumb) modeThumb.style.transform = "translateX(0)";
+      if (modeToggle) modeToggle.style.background = "rgba(0,0,0,0.1)";
+      if (labelVanilla) { labelVanilla.style.fontWeight = "600"; labelVanilla.style.opacity = "1"; }
+      if (labelSmapi) { labelSmapi.style.fontWeight = "500"; labelSmapi.style.opacity = "0.5"; }
+    }
+  }
+
+  if (modeToggle) {
+    modeToggle.addEventListener("click", async () => {
+      appConfig.launch_mode = (appConfig.launch_mode === "SMAPI") ? "Vanilla" : "SMAPI";
+      updateLaunchModeUI(appConfig.launch_mode);
+      await saveConfig();
+    });
+  }
+
+  if (hotkeyBtn && hotkeyLabel) {
     hotkeyBtn.addEventListener('click', () => {
       if (isListeningForKey) return;
       isListeningForKey = true;
@@ -192,22 +280,97 @@ window.addEventListener("DOMContentLoaded", async () => {
       hotkeyLabel.textContent = "입력 대기중..";
     });
 
-    window.addEventListener('keydown', (e) => {
+    window.addEventListener('keydown', async (e) => {
       if (!isListeningForKey) return;
       e.preventDefault(); 
       
-      const keyCode = e.code; // e.g. "F4", "KeyA"
+      const keyCode = e.code;
       hotkeyBtn.classList.remove('listening');
       hotkeyLabel.textContent = keyCode;
       isListeningForKey = false;
 
-      invoke('set_hotkey', { newKey: keyCode }).then(() => {
+      appConfig.hotkey = keyCode;
+      await saveConfig().then(() => {
         hotkeyBtn.classList.add('saved');
         setTimeout(() => hotkeyBtn.classList.remove('saved'), 1000);
       }).catch(err => {
-        console.error("Failed to set hotkey", err);
         hotkeyLabel.textContent = "Error";
       });
+    });
+  }
+
+  if (btnBrowsePath) {
+    btnBrowsePath.addEventListener('click', async () => {
+      try {
+        const { open } = window.__TAURI__.dialog;
+        const selected = await open({
+          directory: true,
+          multiple: false,
+          title: "스타듀밸리 설치 폴더 선택"
+        });
+        if (selected) {
+          appConfig.game_path = selected;
+          inputGamePath.value = selected;
+          await saveConfig();
+          await checkModInstalled();
+        }
+      } catch(err) {
+        console.error(err);
+      }
+    });
+  }
+
+  async function checkModInstalled() {
+    if (!btnInstallHelperMod) return;
+    try {
+      const isInstalled = await invoke('check_mod_installed');
+      if (isInstalled) {
+        btnInstallHelperMod.disabled = true;
+        btnInstallHelperMod.innerHTML = `<span>✅ 이미 모드가 설치되어 있습니다</span>`;
+        btnInstallHelperMod.style.background = 'rgba(46, 204, 113, 0.15)';
+        btnInstallHelperMod.style.borderColor = 'rgba(46, 204, 113, 0.3)';
+        btnInstallHelperMod.style.color = '#2e7d32';
+        btnInstallHelperMod.style.cursor = 'default';
+      } else {
+        btnInstallHelperMod.disabled = false;
+        btnInstallHelperMod.innerHTML = `
+          <svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+          <span id="btn-install-helper-mod-text">스타듀헬퍼 모드 설치</span>
+        `;
+        btnInstallHelperMod.style.background = 'rgba(0,0,0,0.04)';
+        btnInstallHelperMod.style.borderColor = 'rgba(0,0,0,0.08)';
+        btnInstallHelperMod.style.color = '#6d4c41';
+        btnInstallHelperMod.style.cursor = 'pointer';
+      }
+    } catch(err) {
+      console.error(err);
+    }
+  }
+
+  // --- Install Mod Logic ---
+  const btnInstallHelperMod = document.getElementById('btn-install-helper-mod');
+  if (btnInstallHelperMod) {
+    btnInstallHelperMod.addEventListener('click', async () => {
+      btnInstallHelperMod.disabled = true;
+      const originalHtml = btnInstallHelperMod.innerHTML;
+      btnInstallHelperMod.innerHTML = '<span>⏳ 설치 중...</span>';
+      
+      try {
+        const msg = await invoke('install_smapi_mod');
+        btnInstallHelperMod.innerHTML = `<span>✅ 설치 완료!</span>`;
+        btnInstallHelperMod.style.background = 'rgba(46, 204, 113, 0.3)';
+        setTimeout(() => {
+          checkModInstalled();
+        }, 2000);
+      } catch (err) {
+        btnInstallHelperMod.innerHTML = `<span style="font-size: 12px;">❌ ${err}</span>`;
+        btnInstallHelperMod.style.background = 'rgba(231, 76, 60, 0.2)';
+        btnInstallHelperMod.style.color = '#e74c3c';
+        btnInstallHelperMod.style.borderColor = '#e74c3c';
+        setTimeout(() => {
+          checkModInstalled();
+        }, 4000);
+      }
     });
   }
 

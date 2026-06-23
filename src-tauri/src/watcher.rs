@@ -1,9 +1,9 @@
+use crate::save_parser::{get_latest_save_file, parse_save_file};
+use notify::{RecursiveMode, Result as NotifyResult, Watcher};
 use std::path::PathBuf;
-use notify::{Watcher, RecursiveMode, Result as NotifyResult};
-use tauri::{AppHandle, Emitter};
 use std::sync::mpsc::channel;
 use std::time::Duration;
-use crate::save_parser::{get_latest_save_file, parse_save_file};
+use tauri::{AppHandle, Emitter};
 
 pub fn start_watching(app_handle: AppHandle) {
     std::thread::spawn(move || {
@@ -12,7 +12,7 @@ pub fn start_watching(app_handle: AppHandle) {
             Err(_) => return,
         };
         let saves_dir = PathBuf::from(app_data).join("StardewValley").join("Saves");
-        
+
         if !saves_dir.exists() {
             println!("Saves directory not found: {:?}", saves_dir);
             // Optionally emit an event to frontend
@@ -54,14 +54,16 @@ pub fn start_watching(app_handle: AppHandle) {
                         // Modify 류의 이벤트가 발생했을 때
                         if event.kind.is_modify() {
                             // SMAPI 모드일 때는 무거운 파일 시스템 파싱을 무시합니다.
-                            if crate::process_monitor::IS_SMAPI_MODE.load(std::sync::atomic::Ordering::SeqCst) {
+                            if crate::process_monitor::IS_SMAPI_MODE
+                                .load(std::sync::atomic::Ordering::SeqCst)
+                            {
                                 continue;
                             }
 
                             if last_event_time.elapsed() > Duration::from_millis(500) {
                                 last_event_time = std::time::Instant::now();
                                 std::thread::sleep(Duration::from_millis(100)); // 파일 쓰기 완료 대기
-                                
+
                                 if let Some(latest) = get_latest_save_file() {
                                     if let Ok(data) = parse_save_file(&latest) {
                                         println!("Save updated, emitting data...");
@@ -71,7 +73,7 @@ pub fn start_watching(app_handle: AppHandle) {
                             }
                         }
                     }
-                },
+                }
                 Err(e) => {
                     println!("Watch error: {:?}", e);
                     break;

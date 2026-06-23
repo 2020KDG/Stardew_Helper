@@ -1,12 +1,14 @@
+use futures_util::StreamExt;
 use tauri::Emitter;
 use tokio::net::TcpListener;
 use tokio_tungstenite::accept_async;
-use futures_util::StreamExt;
 
 pub fn start_server(app_handle: tauri::AppHandle) {
     tauri::async_runtime::spawn(async move {
         let addr = "127.0.0.1:8765";
-        let listener = TcpListener::bind(&addr).await.expect("Failed to bind to 8765");
+        let listener = TcpListener::bind(&addr)
+            .await
+            .expect("Failed to bind to 8765");
         println!("WebSocket Server listening on: {}", addr);
 
         while let Ok((stream, _)) = listener.accept().await {

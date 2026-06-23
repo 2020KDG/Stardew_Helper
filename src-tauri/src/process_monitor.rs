@@ -1,9 +1,9 @@
-use sysinfo::System;
+use lazy_static::lazy_static;
 use std::sync::atomic::{AtomicBool, Ordering};
 use std::time::Duration;
+use sysinfo::System;
 use tauri::{AppHandle, Emitter};
 use tokio::time::sleep;
-use lazy_static::lazy_static;
 
 lazy_static! {
     pub static ref IS_SMAPI_MODE: AtomicBool = AtomicBool::new(false);
@@ -24,11 +24,12 @@ pub fn get_initial_game_state() -> String {
 pub fn start_monitoring(app_handle: AppHandle) {
     tauri::async_runtime::spawn(async move {
         let mut last_mode = String::new();
+        let mut has_notified_mod_missing = false;
 
         loop {
             // Create a fresh system instance to guarantee we see newly launched processes
             let sys = System::new_all();
-            
+
             let mut is_smapi = false;
             let mut is_vanilla = false;
 
@@ -37,9 +38,40 @@ pub fn start_monitoring(app_handle: AppHandle) {
                 if name.contains("stardewmoddingapi") || name.contains("smapi") {
                     is_smapi = true;
                     break; // SMAPI takes precedence
-                } else if name == "stardew valley.exe" || name == "stardew valley" || name == "stardewvalley" || name == "stardewvalley.exe" {
+                } else if name == "stardew valley.exe"
+                    || name == "stardew valley"
+                    || name == "stardewvalley"
+                    || name == "stardewvalley.exe"
+                {
                     is_vanilla = true;
                 }
+            }
+
+            if is_smapi {
+                use crate::AppState;
+                use tauri::Manager;
+                
+                let state = app_handle.state::<AppState>();
+                let config = state.0.lock().unwrap().clone();
+                let game_path = std::path::Path::new(&config.game_path);
+                let dll_path = game_path.join("Mods").join("StardewHelperMod").join("StardewHelperMod.dll");
+                
+                if !dll_path.exists() {
+                    // Downgrade to Vanilla if mod is not installed
+                    is_smapi = false;
+                    is_vanilla = true;
+
+                    if !has_notified_mod_missing {
+                        has_notified_mod_missing = true;
+                        let _ = app_handle.emit("recommend-mod-install", ());
+                    }
+                } else {
+                    // Reset the notification flag if the mod is installed and running
+                    has_notified_mod_missing = false;
+                }
+            } else if !is_vanilla {
+                // Game is not running at all, reset the flag so they get notified again on next launch
+                has_notified_mod_missing = false;
             }
 
             let current_mode = if is_smapi {

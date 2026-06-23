@@ -1,0 +1,10 @@
+{
+  "Name": "Stardew Helper Websocket Mod",
+  "Author": "Antigravity",
+  "Version": "1.0.0",
+  "Description": "Sends real-time player data to the Stardew Helper Tauri Overlay.",
+  "UniqueID": "Antigravity.StardewHelperMod",
+  "EntryDll": "StardewHelperMod.dll",
+  "MinimumApiVersion": "4.0.0",
+  "UpdateKeys": []
+}
