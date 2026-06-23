@@ -467,38 +467,42 @@ function renderCrops(season) {
     return;
   }
 
+  const tableContainer = document.createElement('div');
+  tableContainer.className = 'data-table-container';
+  
+  let rowsHtml = '';
   seasonData.forEach(crop => {
-    const card = document.createElement('div');
-    card.className = 'data-card';
-    
-    card.innerHTML = `
-      <div class="data-card-header">
-        <span class="data-card-icon">${crop.icon}</span>
-        ${crop.name}
-      </div>
-      <div class="data-card-prop">
-        <span class="data-card-prop-label">유형</span>
-        <span class="data-card-prop-value">${crop.type || '-'}</span>
-      </div>
-      <div class="data-card-prop">
-        <span class="data-card-prop-label">성장 기간</span>
-        <span class="data-card-prop-value">${crop.growth || '-'}</span>
-      </div>
-      <div class="data-card-prop">
-        <span class="data-card-prop-label">다중 수확</span>
-        <span class="data-card-prop-value">${crop.isMulti === 'O' ? '가능' : '불가능'}</span>
-      </div>
-      <div class="data-card-prop">
-        <span class="data-card-prop-label">씨앗 가격</span>
-        <span class="data-card-prop-value">${crop.seedPrice || '-'}</span>
-      </div>
-      <div class="data-card-prop">
-        <span class="data-card-prop-label">판매 가격</span>
-        <span class="data-card-prop-value">${crop.sellPrice || '-'}</span>
-      </div>
+    rowsHtml += `
+      <tr>
+        <td class="col-name"><span style="font-size:1.2rem;">${crop.icon}</span> ${crop.name}</td>
+        <td>${crop.type || '-'}</td>
+        <td>${crop.isMulti || '-'}</td>
+        <td>${crop.growth || '-'}</td>
+        <td>${crop.seedPrice || '-'}</td>
+        <td>${crop.sellPrice || '-'}</td>
+      </tr>
     `;
-    cropsListEl.appendChild(card);
   });
+
+  tableContainer.innerHTML = `
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th style="text-align:left;">작물</th>
+          <th>종류</th>
+          <th>다수확</th>
+          <th>성장 기간</th>
+          <th>씨앗 가격</th>
+          <th>판매가</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${rowsHtml}
+      </tbody>
+    </table>
+  `;
+
+  cropsListEl.appendChild(tableContainer);
 }
 
 function renderFish(season, loc) {
@@ -517,27 +521,44 @@ function renderFish(season, loc) {
     return;
   }
 
+  const tableContainer = document.createElement('div');
+  tableContainer.className = 'data-table-container';
+  
+  let rowsHtml = '';
   locData.forEach(fish => {
-    const card = document.createElement('div');
-    card.className = 'data-card';
-    
-    card.innerHTML = `
-      <div class="data-card-header">
-        <span class="data-card-icon">${fish.icon}</span>
-        ${fish.name}
-      </div>
-      <div class="data-card-prop">
-        <span class="data-card-prop-label">출현 시간</span>
-        <span class="data-card-prop-value">${fish.time || '-'}</span>
-      </div>
-      <div class="data-card-prop">
-        <span class="data-card-prop-label">판매 가격</span>
-        <span class="data-card-prop-value">${fish.sellPrice || '-'}</span>
-      </div>
-      ${fish.note ? `<div class="data-card-note">${fish.note}</div>` : ''}
+    // Process bundle note
+    let formattedNote = fish.note || '-';
+    if (formattedNote.includes('[B]')) {
+      formattedNote = formattedNote.replace(/\[B\]/g, '<span class="bundle-highlight">[번들]</span>');
+    }
+
+    rowsHtml += `
+      <tr>
+        <td class="col-name"><span style="font-size:1.2rem;">${fish.icon}</span> ${fish.name}</td>
+        <td>${fish.time || '-'}</td>
+        <td>${fish.sellPrice || '-'}</td>
+        <td style="text-align:left; max-width: 300px; word-wrap: break-word;">${formattedNote}</td>
+      </tr>
     `;
-    fishListEl.appendChild(card);
   });
+
+  tableContainer.innerHTML = `
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th style="text-align:left;">물고기</th>
+          <th>출현 시간</th>
+          <th>기본 판매가</th>
+          <th style="text-align:left;">특이사항</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${rowsHtml}
+      </tbody>
+    </table>
+  `;
+
+  fishListEl.appendChild(tableContainer);
 }
 
 async function triggerManualRefresh() {
