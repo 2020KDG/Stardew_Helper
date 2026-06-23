@@ -1,5 +1,114 @@
 {
-  "봄": [],
+  "봄": [
+    {
+      "name": "파스닙",
+      "icon": "🥕",
+      "type": "야채",
+      "isMulti": "×",
+      "growth": "4d",
+      "seedPrice": "2d",
+      "sellPrice": "20g"
+    },
+    {
+      "name": "콜리플라워",
+      "icon": "🥦",
+      "type": "야채",
+      "isMulti": "×",
+      "growth": "12d",
+      "seedPrice": "6d",
+      "sellPrice": "80g"
+    },
+    {
+      "name": "완두콩",
+      "icon": "🌱",
+      "type": "야채",
+      "isMulti": "✔\n(3d)",
+      "growth": "10d",
+      "seedPrice": "6d",
+      "sellPrice": "60g"
+    },
+    {
+      "name": "감자",
+      "icon": "🥔",
+      "type": "야채",
+      "isMulti": "×",
+      "growth": "6d",
+      "seedPrice": "3d",
+      "sellPrice": "50g"
+    },
+    {
+      "name": "케일",
+      "icon": "🌱",
+      "type": "야채",
+      "isMulti": "×",
+      "growth": "6d",
+      "seedPrice": "3d",
+      "sellPrice": "70g"
+    },
+    {
+      "name": "딸기",
+      "icon": "🍓",
+      "type": "과일",
+      "isMulti": "✔\n(4d)",
+      "growth": "8d",
+      "seedPrice": "4d",
+      "sellPrice": "100g"
+    },
+    {
+      "name": "당근",
+      "icon": "🌱",
+      "type": "야채",
+      "isMulti": "×",
+      "growth": "3d",
+      "seedPrice": "1d",
+      "sellPrice": "15g\n(안심고 팔면\n받을 금액)"
+    },
+    {
+      "name": "쌀\n(수역)",
+      "icon": "🌱",
+      "type": "야채",
+      "isMulti": "×",
+      "growth": "6d",
+      "seedPrice": "2d",
+      "sellPrice": "20g\n(안심고 팔면\n받을 금액)"
+    },
+    {
+      "name": "푸른 재즈",
+      "icon": "🌱",
+      "type": "꽃",
+      "isMulti": "×",
+      "growth": "7d",
+      "seedPrice": "3d",
+      "sellPrice": "30g"
+    },
+    {
+      "name": "튤립",
+      "icon": "🌱",
+      "type": "꽃",
+      "isMulti": "×",
+      "growth": "6d",
+      "seedPrice": "3d",
+      "sellPrice": "20g"
+    },
+    {
+      "name": "대황",
+      "icon": "🌱",
+      "type": "과일",
+      "isMulti": "×",
+      "growth": "13d",
+      "seedPrice": "7d",
+      "sellPrice": "100g"
+    },
+    {
+      "name": "마늘",
+      "icon": "🧄",
+      "type": "야채",
+      "isMulti": "×",
+      "growth": "4d",
+      "seedPrice": "2d",
+      "sellPrice": "40g"
+    }
+  ],
   "여름": [
     {
       "name": "멜론",

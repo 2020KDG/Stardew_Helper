@@ -545,8 +545,27 @@ h1, h2, h3, h4, h5, h6 {
   flex-direction: column;
   gap: var(--sp-8);
   margin-bottom: var(--sp-24);
-  padding-right: 4px; /* 우측 여백을 주어 이동 시 잘리지 않도록 함 */
+  padding-right: 4px; /* 스크롤바 공간 확보 */
+  overflow-y: auto;
+  flex: 1;
+  min-height: 0;
 }
+
+/* Custom Scrollbar for Sidebar Nav */
+.sidebar-nav::-webkit-scrollbar {
+  width: 6px;
+}
+.sidebar-nav::-webkit-scrollbar-track {
+  background: transparent;
+}
+.sidebar-nav::-webkit-scrollbar-thumb {
+  background-color: rgba(150, 83, 37, 0.2);
+  border-radius: 10px;
+}
+.sidebar-nav::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(150, 83, 37, 0.4);
+}
+
 .nav-btn {
   background: rgba(255, 255, 255, 0.5);
   border: 1px solid rgba(150, 83, 37, 0.3);
