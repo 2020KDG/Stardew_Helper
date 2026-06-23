@@ -110,7 +110,7 @@
       {
         "name": "장어",
         "icon": "🐟",
-        "time": "",
+        "time": "16:00 ~ 02:00 🌧️",
         "exp": "26",
         "sellBase": "85g",
         "sellIridium": "170g",
@@ -151,7 +151,7 @@
       {
         "name": "도미",
         "icon": "🐟",
-        "time": "",
+        "time": "18:00 ~ 02:00",
         "exp": "14",
         "sellBase": "45g",
         "sellIridium": "90g",
@@ -177,7 +177,7 @@
       {
         "name": "전어",
         "icon": "🐟",
-        "time": "",
+        "time": "09:00 ~ 02:00 🌧️",
         "exp": "18",
         "sellBase": "60g",
         "sellIridium": "120g",
@@ -218,7 +218,7 @@
       {
         "name": "도미",
         "icon": "🐟",
-        "time": "",
+        "time": "18:00 ~ 02:00",
         "exp": "14",
         "sellBase": "45g",
         "sellIridium": "90g",
@@ -257,7 +257,7 @@
       {
         "name": "전어",
         "icon": "🐟",
-        "time": "",
+        "time": "09:00 ~ 02:00 🌧️",
         "exp": "18",
         "sellBase": "60g",
         "sellIridium": "120g",
@@ -471,7 +471,7 @@
       {
         "name": "복어",
         "icon": "🐡",
-        "time": "",
+        "time": "12:00 ~ 16:00☀️",
         "exp": "29",
         "sellBase": "200g",
         "sellIridium": "400g",
@@ -484,7 +484,7 @@
       {
         "name": "슈퍼 해삼",
         "icon": "🥒",
-        "time": "",
+        "time": "18:00 ~ 02:00",
         "exp": "29",
         "sellBase": "250g",
         "sellIridium": "500g",
@@ -512,7 +512,7 @@
       {
         "name": "도미",
         "icon": "🐟",
-        "time": "",
+        "time": "18:00 ~ 02:00",
         "exp": "14",
         "sellBase": "45g",
         "sellIridium": "90g",
@@ -525,7 +525,7 @@
       {
         "name": "전어",
         "icon": "🐟",
-        "time": "",
+        "time": "09:00 ~ 02:00 🌧️",
         "exp": "18",
         "sellBase": "60g",
         "sellIridium": "120g",
@@ -579,7 +579,7 @@
       {
         "name": "도미",
         "icon": "🐟",
-        "time": "",
+        "time": "18:00 ~ 02:00",
         "exp": "14",
         "sellBase": "45g",
         "sellIridium": "90g",
@@ -605,7 +605,7 @@
       {
         "name": "전어",
         "icon": "🐟",
-        "time": "",
+        "time": "09:00 ~ 02:00 🌧️",
         "exp": "18",
         "sellBase": "60g",
         "sellIridium": "120g",
@@ -726,7 +726,7 @@
       {
         "name": "월아이",
         "icon": "🐟",
-        "time": "",
+        "time": "12:00 ~ 02:00 🌧️",
         "exp": "18",
         "sellBase": "105g",
         "sellIridium": "210g",
@@ -739,7 +739,7 @@
       {
         "name": "자정 잉어",
         "icon": "🐟",
-        "time": "",
+        "time": "22:00 ~ 02:00",
         "exp": "21",
         "sellBase": "150g",
         "sellIridium": "300g",
@@ -832,7 +832,7 @@
       {
         "name": "장어",
         "icon": "🐟",
-        "time": "",
+        "time": "16:00 ~ 02:00 🌧️",
         "exp": "26",
         "sellBase": "85g",
         "sellIridium": "170g",
@@ -845,7 +845,7 @@
       {
         "name": "슈퍼 해삼",
         "icon": "🥒",
-        "time": "",
+        "time": "18:00 ~ 02:00",
         "exp": "29",
         "sellBase": "250g",
         "sellIridium": "500g",
@@ -860,7 +860,7 @@
       {
         "name": "도미",
         "icon": "🐟",
-        "time": "",
+        "time": "18:00 ~ 02:00",
         "exp": "14",
         "sellBase": "45g",
         "sellIridium": "90g",
@@ -886,7 +886,7 @@
       {
         "name": "전어",
         "icon": "🐟",
-        "time": "",
+        "time": "09:00 ~ 02:00 🌧️",
         "exp": "18",
         "sellBase": "60g",
         "sellIridium": "120g",
@@ -912,7 +912,7 @@
       {
         "name": "월아이",
         "icon": "🐟",
-        "time": "",
+        "time": "12:00 ~ 02:00 🌧️",
         "exp": "18",
         "sellBase": "105g",
         "sellIridium": "210g",
@@ -953,7 +953,7 @@
       {
         "name": "도미",
         "icon": "🐟",
-        "time": "",
+        "time": "18:00 ~ 02:00",
         "exp": "14",
         "sellBase": "45g",
         "sellIridium": "90g",
@@ -992,7 +992,7 @@
       {
         "name": "전어",
         "icon": "🐟",
-        "time": "",
+        "time": "09:00 ~ 02:00 🌧️",
         "exp": "18",
         "sellBase": "60g",
         "sellIridium": "120g",
@@ -1018,7 +1018,7 @@
       {
         "name": "월아이",
         "icon": "🐟",
-        "time": "",
+        "time": "12:00 ~ 02:00 🌧️",
         "exp": "18",
         "sellBase": "105g",
         "sellIridium": "210g",
@@ -1031,7 +1031,7 @@
       {
         "name": "자정 잉어",
         "icon": "🐟",
-        "time": "",
+        "time": "22:00 ~ 02:00",
         "exp": "21",
         "sellBase": "150g",
         "sellIridium": "300g",
@@ -1152,7 +1152,7 @@
       {
         "name": "자정 잉어",
         "icon": "🐟",
-        "time": "",
+        "time": "22:00 ~ 02:00",
         "exp": "21",
         "sellBase": "150g",
         "sellIridium": "300g",
@@ -1271,7 +1271,7 @@
       {
         "name": "오징어",
         "icon": "🦑",
-        "time": "",
+        "time": "18:00 ~ 02:00",
         "exp": "28",
         "sellBase": "80g",
         "sellIridium": "160g",
@@ -1299,7 +1299,7 @@
       {
         "name": "도미",
         "icon": "🐟",
-        "time": "",
+        "time": "18:00 ~ 02:00",
         "exp": "14",
         "sellBase": "45g",
         "sellIridium": "90g",
@@ -1366,7 +1366,7 @@
       {
         "name": "도미",
         "icon": "🐟",
-        "time": "",
+        "time": "18:00 ~ 02:00",
         "exp": "14",
         "sellBase": "45g",
         "sellIridium": "90g",
@@ -1431,7 +1431,7 @@
       {
         "name": "자정 잉어",
         "icon": "🐟",
-        "time": "",
+        "time": "22:00 ~ 02:00",
         "exp": "21",
         "sellBase": "150g",
         "sellIridium": "300g",
@@ -1669,7 +1669,7 @@
       {
         "name": "해삼",
         "icon": "🥒",
-        "time": "",
+        "time": "17:00 ~ 02:00",
         "exp": "16",
         "sellBase": "75g",
         "sellIridium": "150g",
@@ -1682,7 +1682,7 @@
       {
         "name": "자정오징어",
         "icon": "🐟",
-        "time": "",
+        "time": "17:00 ~ 02:00",
         "exp": "21",
         "sellBase": "100g",
         "sellIridium": "200g",
@@ -1695,7 +1695,7 @@
       {
         "name": "문어",
         "icon": "🐙",
-        "time": "",
+        "time": "17:00 ~ 02:00",
         "exp": "34",
         "sellBase": "150g",
         "sellIridium": "300g",
@@ -1708,7 +1708,7 @@
       {
         "name": "통안어",
         "icon": "🐟",
-        "time": "",
+        "time": "17:00 ~ 02:00",
         "exp": "23",
         "sellBase": "220g",
         "sellIridium": "440g",
@@ -1721,7 +1721,7 @@
       {
         "name": "슈퍼 해삼",
         "icon": "🥒",
-        "time": "",
+        "time": "17:00 ~ 02:00",
         "exp": "29",
         "sellBase": "250g",
         "sellIridium": "500g",
@@ -1734,7 +1734,7 @@
       {
         "name": "블롭피쉬",
         "icon": "🐟",
-        "time": "",
+        "time": "17:00 ~ 02:00",
         "exp": "28",
         "sellBase": "500g",
         "sellIridium": "1000g",
@@ -1747,7 +1747,7 @@
       {
         "name": "진주",
         "icon": "🐟",
-        "time": "",
+        "time": "17:00 ~ 02:00",
         "exp": "-",
         "sellBase": "2500g",
         "sellIridium": "",
@@ -1802,7 +1802,7 @@
       {
         "name": "복어",
         "icon": "🐡",
-        "time": "",
+        "time": "12:00 ~ 16:00☀️",
         "exp": "29",
         "sellBase": "200g",
         "sellIridium": "400g",
@@ -1815,7 +1815,7 @@
       {
         "name": "슈퍼 해삼",
         "icon": "🥒",
-        "time": "",
+        "time": "18:00 ~ 02:00",
         "exp": "29",
         "sellBase": "250g",
         "sellIridium": "500g",
@@ -1882,7 +1882,7 @@
       {
         "name": "복어",
         "icon": "🐡",
-        "time": "",
+        "time": "12:00 ~ 16:00☀️",
         "exp": "29",
         "sellBase": "200g",
         "sellIridium": "400g",
@@ -1895,7 +1895,7 @@
       {
         "name": "슈퍼 해삼",
         "icon": "🥒",
-        "time": "",
+        "time": "18:00 ~ 02:00",
         "exp": "29",
         "sellBase": "250g",
         "sellIridium": "500g",
@@ -1934,7 +1934,7 @@
       {
         "name": "자정 잉어",
         "icon": "🐟",
-        "time": "",
+        "time": "22:00 ~ 02:00",
         "exp": "21",
         "sellBase": "150g",
         "sellIridium": "300g",
@@ -1975,7 +1975,7 @@
       {
         "name": "자정 잉어",
         "icon": "🐟",
-        "time": "",
+        "time": "22:00 ~ 02:00",
         "exp": "21",
         "sellBase": "150g",
         "sellIridium": "300g",
@@ -2029,7 +2029,7 @@
       {
         "name": "복어",
         "icon": "🐡",
-        "time": "",
+        "time": "12:00 ~ 15:00☀️",
         "exp": "29",
         "sellBase": "200g",
         "sellIridium": "400g",
@@ -2042,7 +2042,7 @@
       {
         "name": "슈퍼 해삼",
         "icon": "🥒",
-        "time": "",
+        "time": "18:00 ~ 02:00",
         "exp": "29",
         "sellBase": "250g",
         "sellIridium": "500g",
