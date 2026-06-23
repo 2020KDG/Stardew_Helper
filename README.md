@@ -27,6 +27,8 @@ Stardew Helper는 스타듀밸리(Stardew Valley)를 더욱 쾌적하게 즐길 
 2. **무설치 버전 (Portable)**: [📥 StardewHelper_Portable.exe 다운로드](https://github.com/2020KDG/Stardew_Helper/releases/download/Test_version/StardewHelper_Portable.exe)
    - 설치 과정 없이 다운로드 후 바로 더블 클릭하여 사용할 수 있습니다.
 
+3. 모드 설치를 권장합니다. [📥 StardewHelperMod.zip 다운로드](https://github.com/2020KDG/Stardew_Helper/releases/download/Test_version/StardewHelperMod.zip)
+
 ---
 
 ## 🛠️ 개발 환경
