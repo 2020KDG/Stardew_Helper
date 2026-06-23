@@ -535,7 +535,29 @@ function renderFish(season, loc) {
   fishListEl.innerHTML = '';
 
   const seasonData = fishData[season] || {};
-  const locData = seasonData[loc] || [];
+  let locData = [];
+  
+  if (season === "특수") {
+    if (loc === "전설") {
+      locData = [].concat(seasonData["항 목"] || [], seasonData["항목"] || []);
+    } else if (loc === "통발") {
+      locData = [].concat(seasonData["민물"] || [], seasonData["바다"] || [], seasonData["쓰레기들"] || []);
+    } else if (loc === "진저섬") {
+      locData = [].concat(seasonData["지역"] || [], seasonData["남쪽\n&\n남동쪽"] || [], seasonData["서쪽\n(농장,\n바닷가)"] || [], seasonData["북쪽"] || [], seasonData["해적의 만"] || []);
+    } else if (loc === "광산") {
+      locData = [].concat(seasonData["산"] || [], seasonData["칼데라"] || []);
+    } else if (loc === "비밀의 숲") {
+      locData = [].concat(seasonData["숲"] || [], seasonData["마녀의 늪\n(기찻길)"] || []);
+    } else if (loc === "하수도") {
+      locData = [].concat(seasonData["하수도"] || [], seasonData["곤충 둥지\n(하수도)"] || []);
+    } else if (loc === "야시장") {
+      locData = seasonData["야시장\n(잠수함)"] || [];
+    } else {
+      locData = seasonData[loc] || [];
+    }
+  } else {
+    locData = seasonData[loc] || [];
+  }
 
   if (locData.length === 0) {
     fishListEl.innerHTML = `<div style="padding: 20px; color: #5d3d19;">데이터가 없습니다.</div>`;

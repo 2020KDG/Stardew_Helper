@@ -674,7 +674,7 @@ h1, h2, h3, h4, h5, h6 {
 ============================== */
 
 .sub-nav.expanded {
-  max-height: 400px;
+  max-height: 2000px;
   opacity: 1;
   padding: 6px 0; /* Tighter vertical padding */
   margin-bottom: 8px;
@@ -741,7 +741,7 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 4px;
 }
 .nested-sub-nav.expanded {
-  max-height: 250px;
+  max-height: 1000px;
   opacity: 1;
   padding: 4px 0;
   margin-bottom: 4px;
