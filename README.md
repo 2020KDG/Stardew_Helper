@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="app_icon.png" width="128" height="128" alt="Stardew Helper Icon">
+  <img src="icon.png" width="128" height="128" alt="Stardew Helper Icon">
   <h1>🚜 Stardew Helper</h1>
   <p><b>스타듀밸리 유저들을 위한 스마트한 오버레이 런처 & 모드 매니저</b></p>
 </div>
