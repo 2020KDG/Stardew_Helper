@@ -50,12 +50,15 @@ pub fn start_monitoring(app_handle: AppHandle) {
             if is_smapi {
                 use crate::AppState;
                 use tauri::Manager;
-                
+
                 let state = app_handle.state::<AppState>();
                 let config = state.0.lock().unwrap().clone();
                 let game_path = std::path::Path::new(&config.game_path);
-                let dll_path = game_path.join("Mods").join("StardewHelperMod").join("StardewHelperMod.dll");
-                
+                let dll_path = game_path
+                    .join("Mods")
+                    .join("StardewHelperMod")
+                    .join("StardewHelperMod.dll");
+
                 if !dll_path.exists() {
                     // Downgrade to Vanilla if mod is not installed
                     is_smapi = false;

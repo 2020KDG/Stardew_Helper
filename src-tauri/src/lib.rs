@@ -117,7 +117,10 @@ fn check_mod_installed(state: tauri::State<'_, AppState>) -> Result<bool, String
     if !game_path.exists() {
         return Ok(false);
     }
-    let dll_path = game_path.join("Mods").join("StardewHelperMod").join("StardewHelperMod.dll");
+    let dll_path = game_path
+        .join("Mods")
+        .join("StardewHelperMod")
+        .join("StardewHelperMod.dll");
     Ok(dll_path.exists())
 }
 
@@ -145,9 +148,11 @@ fn set_window_mode(_window: tauri::Window, _mode: String) {
 fn launch_game(state: tauri::State<'_, AppState>) -> Result<(), String> {
     let config = state.0.lock().unwrap().clone();
     let game_path = std::path::Path::new(&config.game_path);
-    
+
     if !game_path.exists() {
-        return Err("설정된 게임 경로가 올바르지 않습니다. 설정 탭에서 경로를 지정해주세요.".to_string());
+        return Err(
+            "설정된 게임 경로가 올바르지 않습니다. 설정 탭에서 경로를 지정해주세요.".to_string(),
+        );
     }
 
     let exe_name = if config.launch_mode == "SMAPI" {
