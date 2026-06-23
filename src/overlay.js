@@ -478,23 +478,34 @@ function renderCrops(season) {
         <td>${crop.type || '-'}</td>
         <td>${crop.isMulti || '-'}</td>
         <td>
-          <div><strong>기본:</strong> ${crop.growthBase || '-'}</div>
-          <div style="font-size:0.8rem; color:#666;">성촉: ${crop.growthSpeedGro || '-'} | 디성촉: ${crop.growthDeluxe || '-'} | 하성촉: ${crop.growthHyper || '-'}</div>
+          <div style="font-weight:600;">기본: ${crop.growthBase || '-'}</div>
+          <div class="item-badge-container">
+            <span class="item-badge">성촉: ${crop.growthSpeedGro || '-'}</span>
+            <span class="item-badge">디성촉: ${crop.growthDeluxe || '-'}</span>
+            <span class="item-badge">하성촉: ${crop.growthHyper || '-'}</span>
+          </div>
         </td>
         <td>
-          <div><strong>기본:</strong> ${crop.agBase || '-'}</div>
-          <div style="font-size:0.8rem; color:#666;">성촉: ${crop.agSpeedGro || '-'} | 디성촉: ${crop.agDeluxe || '-'} | 하성촉: ${crop.agHyper || '-'}</div>
+          <div style="font-weight:600;">기본: ${crop.agBase || '-'}</div>
+          <div class="item-badge-container">
+            <span class="item-badge">성촉: ${crop.agSpeedGro || '-'}</span>
+            <span class="item-badge">디성촉: ${crop.agDeluxe || '-'}</span>
+            <span class="item-badge">하성촉: ${crop.agHyper || '-'}</span>
+          </div>
         </td>
         <td>${crop.exp || '-'}</td>
         <td>${crop.seedPrice || '-'}</td>
         <td>
-          <div style="color:#5d3d19;"><strong>${crop.sellBase || '-'}</strong></div>
-          <div style="font-size:0.8rem;">⭐ ${crop.sellSilver || '-'} | 🌟 ${crop.sellGold || '-'}</div>
+          <div style="color:#5d3d19; font-weight:600;">기본: ${crop.sellBase || '-'}</div>
+          <div class="item-badge-container">
+            <span class="item-badge silver">은: ${crop.sellSilver || '-'}</span>
+            <span class="item-badge gold">금: ${crop.sellGold || '-'}</span>
+          </div>
         </td>
         <td>${crop.gpd || '-'}</td>
         <td style="white-space:pre-wrap;">${crop.epg || '-'}</td>
-        <td style="text-align:left; max-width: 200px; word-wrap: break-word; white-space:pre-wrap;">${crop.notes || '-'}</td>
-        <td style="text-align:left; max-width: 200px; word-wrap: break-word; font-weight:bold; color:#d35400;">${crop.evalScore || '-'}</td>
+        <td style="text-align:left; max-width: 260px; word-wrap: break-word; white-space:pre-wrap; line-height:1.4;">${crop.notes || '-'}</td>
+        <td style="text-align:left; max-width: 260px; word-wrap: break-word; font-weight:bold; color:#d35400; line-height:1.4;">${crop.evalScore || '-'}</td>
       </tr>
     `;
   });
@@ -589,12 +600,14 @@ function renderFish(season, loc) {
         <td>${fish.time || '-'}</td>
         <td>${fish.exp || '-'}</td>
         <td>
-          <div style="color:#5d3d19;"><strong>기본: ${fish.sellBase || '-'}</strong></div>
-          <div style="font-size:0.8rem; color:#666;">이리듐: ${fish.sellIridium || '-'}</div>
-          <div style="font-size:0.8rem; color:#666;">이리듐+앵글러: ${fish.sellAngler || '-'}</div>
+          <div style="color:#5d3d19; font-weight:600;">기본: ${fish.sellBase || '-'}</div>
+          <div class="item-badge-container" style="flex-direction:column; align-items:flex-start;">
+            <span class="item-badge iridium">이리듐: ${fish.sellIridium || '-'}</span>
+            <span class="item-badge iridium">앵글러: ${fish.sellAngler || '-'}</span>
+          </div>
         </td>
         <td style="white-space:pre-wrap;">${fish.epg || '-'}</td>
-        <td style="text-align:left; max-width: 200px; word-wrap: break-word; white-space:pre-wrap;">${formattedNote}</td>
+        <td style="text-align:left; max-width: 300px; word-wrap: break-word; white-space:pre-wrap; line-height:1.4;">${formattedNote}</td>
         <td style="white-space:pre-wrap;">${fish.diff || '-'}</td>
 
       </tr>
