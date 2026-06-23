@@ -48,7 +48,7 @@
               </button>
             </div>
             <div class="launcher-header-actions">
-              <span id="mode-badge" class="badge smapi">SMAPI MODE</span>
+              <!-- Removed WAITING badge -->
             </div>
           </div>
 
@@ -56,45 +56,46 @@
             <!-- Dashboard Tab -->
             <div class="dashboard-tab-content active" id="tab-dashboard">
               
-              <!-- Startup Status Card (Centered Overlay) -->
-              <div id="startup-status-card" class="startup-status-card">
-                <div class="startup-header">
-                  <span class="startup-icon">🌱</span>
-                  <div class="startup-titles">
-                    <h2>Stardew Helper</h2>
-                    <p id="loading-status-text">게임이 실행되면 자동으로 연결됩니다.</p>
-                  </div>
-                </div>
-                <div class="status-checklist">
-                  <div class="status-item active" id="status-step-1">
-                    <svg class="status-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/></svg>
-                    <span class="status-text">게임 프로세스 감지 대기 중</span>
-                  </div>
-                  <div class="status-item pending" id="status-step-2">
-                    <svg class="status-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/></svg>
-                    <span class="status-text">플러그인 및 모드 확인</span>
-                  </div>
-                  <div class="status-item pending" id="status-step-3">
-                    <svg class="status-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/></svg>
-                    <span class="status-text">오버레이 연결 준비</span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Dashboard Grid (Hidden until ready) -->
-              <div id="dashboard-grid" class="dashboard-grid pending-reveal">
+              <!-- Dashboard Grid (Visible immediately) -->
+              <div id="dashboard-grid" class="dashboard-grid">
                 
-                <!-- Main Hero / Farm Overview -->
-                <div class="dashboard-hero">
-                  <div class="hero-bg-overlay"></div>
-                  <div class="hero-content">
+                <!-- Main Hub / Farm Overview -->
+                <div class="dashboard-hub">
+                  <div class="hub-header">
                     <div class="hero-icon">🏡</div>
                     <div class="hero-info">
-                      <h2 class="farm-name">송앤도 Farm</h2>
-                      <p class="farm-meta">Standard Farm | <strong>Year 1 · Spring 22</strong> (목요일)</p>
-                      <div class="farm-gold">
-                        <span class="gold-icon">🪙</span>
-                        <span class="gold-amount">263,145,500 G</span>
+                      <h2 class="farm-name" id="display-farm-name">Waiting for Save Data...</h2>
+                      <p class="farm-meta" id="display-farm-meta">Start the game to load your farm</p>
+                    </div>
+                  </div>
+                  
+                  <div class="hub-stats-grid">
+                    <div class="stat-card">
+                      <span class="stat-icon">🪙</span>
+                      <div class="stat-text">
+                        <span class="stat-label">소지금</span>
+                        <span class="stat-value" id="display-farm-gold">0 G</span>
+                      </div>
+                    </div>
+                    <div class="stat-card">
+                      <span class="stat-icon">⏱️</span>
+                      <div class="stat-text">
+                        <span class="stat-label">플레이 타임</span>
+                        <span class="stat-value" id="display-play-time">-</span>
+                      </div>
+                    </div>
+                    <div class="stat-card">
+                      <span class="stat-icon">💾</span>
+                      <div class="stat-text">
+                        <span class="stat-label">최근 저장</span>
+                        <span class="stat-value" id="display-save-date">-</span>
+                      </div>
+                    </div>
+                    <div class="stat-card">
+                      <span class="stat-icon">🌱</span>
+                      <div class="stat-text">
+                        <span class="stat-label">현재 계절</span>
+                        <span class="stat-value" id="display-season">-</span>
                       </div>
                     </div>
                   </div>
@@ -103,33 +104,24 @@
                 <!-- Side Panel / Status -->
                 <div class="dashboard-status-panel">
                   <h3 class="panel-title">시스템 상태</h3>
-                  <ul class="status-list">
-                    <li class="status-list-item good">
+                  <div class="system-status-cards">
+                    <div class="status-card disconnected" id="status-game">
                       <div class="status-indicator"></div>
-                      <div class="status-details">
-                        <span class="status-name">SMAPI 플러그인</span>
-                        <span class="status-val">연결됨 (v4.0.0)</span>
-                      </div>
-                    </li>
-                    <li class="status-list-item good">
+                      <div class="status-text">게임 연결</div>
+                    </div>
+                    <div class="status-card disconnected" id="status-smapi">
                       <div class="status-indicator"></div>
-                      <div class="status-details">
-                        <span class="status-name">오버레이 시스템</span>
-                        <span class="status-val">준비 완료 (대기 중)</span>
-                      </div>
-                    </li>
-                    <li class="status-list-item info">
+                      <div class="status-text">SMAPI 연결</div>
+                    </div>
+                    <div class="status-card disconnected" id="status-overlay">
                       <div class="status-indicator"></div>
-                      <div class="status-details">
-                        <span class="status-name">최근 저장 확인</span>
-                        <span class="status-val">1분 전</span>
-                      </div>
-                    </li>
-                  </ul>
+                      <div class="status-text">오버레이 상태</div>
+                    </div>
+                  </div>
                   
-                  <button class="launch-btn main-action">
+                  <button class="launch-btn main-action" id="btn-launch-game">
                     <svg width="24" height="24" viewBox="0 0 24 24" style="margin-right: 8px;"><path fill="currentColor" d="M8 5v14l11-7z"/></svg>
-                    게임 실행하기
+                    <span>게임 실행하기</span>
                   </button>
                 </div>
 
@@ -138,49 +130,56 @@
 
             <!-- Hotkey Tab -->
             <div class="dashboard-tab-content" id="tab-hotkey">
-              <div class="modern-card">
-                <div class="card-header">
-                  <div class="card-icon">⌨️</div>
-                  <div class="card-title">
-                    <h3>단축키 설정</h3>
-                    <p>게임 내 오버레이 조작 단축키</p>
-                  </div>
+              <div class="settings-container">
+                <div class="section-header">
+                  <h3>단축키 설정</h3>
+                  <p>게임 내 오버레이 조작 단축키</p>
                 </div>
-                <div class="card-body">
-                  <div class="hotkey-setting-row">
-                    <span class="setting-label">오버레이 켜기/끄기</span>
-                    <button class="hotkey-btn">F3</button>
+                
+                <div class="settings-list">
+                  <div class="setting-item">
+                    <div class="setting-info">
+                      <h4>오버레이 켜기/끄기</h4>
+                      <p>현재 단축키: <span id="current-hotkey-label">F3</span></p>
+                    </div>
+                    <button class="hotkey-btn" id="btn-hotkey-change">변경</button>
                   </div>
+                  <!-- Future settings can be easily added here as new .setting-item rows -->
                 </div>
               </div>
             </div>
 
             <!-- Mods Tab -->
             <div class="dashboard-tab-content" id="tab-mods">
-              <div class="modern-card">
-                <div class="card-header">
-                  <div class="card-icon">🧩</div>
-                  <div class="card-title">
-                    <h3>추천 모드</h3>
-                    <p>Stardew Helper와 함께 사용하면 좋은 모드</p>
-                  </div>
+              <div class="mods-container">
+                <div class="section-header">
+                  <h3>추천 모드</h3>
+                  <p>Stardew Helper와 함께 사용하면 좋은 모드</p>
                 </div>
-                <div class="card-body">
-                  <div class="mods-grid">
-                    <a href="#" class="mod-item">
+                
+                <div class="mods-grid">
+                  <div class="mod-card">
+                    <div class="mod-header">
                       <div class="mod-icon">UI</div>
-                      <div class="mod-info">
+                      <div class="mod-title">
                         <h4>UI Info Suite 2</h4>
-                        <p>필수 UI 정보 표시</p>
+                        <span class="mod-author">Annosz</span>
                       </div>
-                    </a>
-                    <a href="#" class="mod-item">
+                    </div>
+                    <p class="mod-desc">경험치, 행운, NPC 위치 등 필수 UI 정보를 표시합니다.</p>
+                    <button class="mod-action-btn">다운로드</button>
+                  </div>
+                  
+                  <div class="mod-card">
+                    <div class="mod-header">
                       <div class="mod-icon">🗺️</div>
-                      <div class="mod-info">
+                      <div class="mod-title">
                         <h4>NPC Map Locations</h4>
-                        <p>주민 위치 표시</p>
+                        <span class="mod-author">Bouhm</span>
                       </div>
-                    </a>
+                    </div>
+                    <p class="mod-desc">지도 상에 주민들의 실시간 위치를 표시해 줍니다.</p>
+                    <button class="mod-action-btn">다운로드</button>
                   </div>
                 </div>
               </div>

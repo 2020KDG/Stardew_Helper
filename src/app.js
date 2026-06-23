@@ -39,144 +39,176 @@ window.addEventListener("DOMContentLoaded", async () => {
     });
   });
 
-  // --- Loading Messages ---
-  const loadingMessages = [
-    "게임이 실행되면 자동으로 연결됩니다.",
-    "SMAPI 플러그인을 감지하는 중...",
-    "저장 데이터를 분석하는 중...",
-    "스듀 헬퍼 백그라운드 준비 중...",
-    "잠시만 기다려주세요..."
-  ];
-  let loadingMessageIndex = 0;
-  let loadingMessageInterval = null;
+  // --- System Status Updates ---
+  const launchBtn = document.getElementById('btn-launch-game');
 
-  function startLoadingMessages() {
-    if (loadingMessageInterval) return;
-    loadingMessageIndex = 0;
-    if (loadingStatusText) {
-      loadingStatusText.textContent = loadingMessages[loadingMessageIndex];
-      loadingStatusText.classList.remove("fade-out");
-    }
-
-    loadingMessageInterval = setInterval(() => {
-      if (!loadingStatusText) return;
-      loadingStatusText.classList.add("fade-out");
-      setTimeout(() => {
-        loadingMessageIndex = (loadingMessageIndex + 1) % loadingMessages.length;
-        loadingStatusText.textContent = loadingMessages[loadingMessageIndex];
-        loadingStatusText.classList.remove("fade-out");
-      }, 800);
-    }, 4000);
-  }
-
-  function stopLoadingMessages() {
-    if (loadingMessageInterval) {
-      clearInterval(loadingMessageInterval);
-      loadingMessageInterval = null;
+  function updateStatusItem(element, stateClass, text) {
+    if (!element) return;
+    element.className = `status-card ${stateClass}`;
+    const valEl = element.querySelector('.status-text');
+    if (valEl) {
+      valEl.innerText = text;
     }
   }
 
-  startLoadingMessages();
-
-  // --- State Transition Logic ---
-  const iconCircle = '<path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/>';
-  const iconCheck = '<path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>';
-
-  function updateChecklist(mode) {
-    const step1 = document.getElementById('status-step-1');
-    const step2 = document.getElementById('status-step-2');
-    const step3 = document.getElementById('status-step-3');
-
+  function updateStatusIndicators(mode) {
+    const statusGame = document.getElementById('status-game');
+    const statusSmapi = document.getElementById('status-smapi');
+    const statusOverlay = document.getElementById('status-overlay');
+    
+    // Add logic for Save Time if it were a card, but it's in dashboard stats now!
+    // So we don't have statusSave card anymore on the right side.
+    
     if (mode === "None") {
-      startLoadingMessages();
-      if (step1) {
-        step1.className = 'status-item active';
-        step1.querySelector('svg').innerHTML = iconCircle;
-        step1.querySelector('.status-text').innerText = "게임 프로세스 감지 대기 중";
-      }
-      if (step2) {
-        step2.className = 'status-item pending';
-        step2.querySelector('svg').innerHTML = iconCircle;
-        step2.querySelector('.status-text').innerText = "플러그인 및 모드 확인";
-      }
-      if (step3) {
-        step3.className = 'status-item pending';
-        step3.querySelector('svg').innerHTML = iconCircle;
-        step3.querySelector('.status-text').innerText = "오버레이 연결 준비";
+      updateStatusItem(statusGame, 'waiting', '대기 중 (게임 실행 안 됨)');
+      updateStatusItem(statusSmapi, 'waiting', 'SMAPI 연결 대기 중');
+      updateStatusItem(statusOverlay, 'waiting', '오버레이 연결 대기 중');
+      
+      if (launchBtn) {
+        launchBtn.className = 'launch-btn main-action';
+        launchBtn.disabled = false;
+        launchBtn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" style="margin-right: 8px;"><path fill="currentColor" d="M8 5v14l11-7z"/></svg><span>게임 실행하기</span>';
       }
     } else {
-      stopLoadingMessages();
-      if (loadingStatusText) {
-        loadingStatusText.textContent = "메인 런처를 실행합니다...";
-        loadingStatusText.classList.remove("fade-out");
-      }
-      if (step1) {
-        step1.className = 'status-item active';
-        step1.querySelector('svg').innerHTML = iconCheck;
-        step1.querySelector('.status-text').innerText = "게임 프로세스 감지 완료";
-      }
-      if (step2) {
-        step2.className = 'status-item active';
-        step2.querySelector('svg').innerHTML = iconCheck;
-        step2.querySelector('.status-text').innerText = mode === "SMAPI" ? "SMAPI 플러그인 확인 완료" : "바닐라 게임 확인 완료";
-      }
-      if (step3) {
-        step3.className = 'status-item active';
-        step3.querySelector('svg').innerHTML = iconCheck;
-        step3.querySelector('.status-text').innerText = "오버레이 연결 성공";
-      }
-
-      // 런처 모드 뱃지 업데이트
-      const badge = document.getElementById("mode-badge");
-      if (badge) {
-        badge.innerText = mode === "SMAPI" ? "SMAPI MODE" : "VANILLA MODE";
-        badge.className = mode === "SMAPI" ? "badge smapi" : "badge vanilla";
+      updateStatusItem(statusGame, 'good', '🟢 게임 연결됨');
+      updateStatusItem(statusSmapi, mode === "SMAPI" ? 'good' : 'info', mode === "SMAPI" ? '🟢 SMAPI 연결됨' : '🟡 바닐라 모드 실행됨');
+      updateStatusItem(statusOverlay, 'good', '🟢 오버레이 활성화');
+      
+      if (launchBtn) {
+        launchBtn.className = 'launch-btn main-action connected';
+        launchBtn.disabled = true;
+        launchBtn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" style="margin-right: 8px;"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg><span>Connected</span>';
       }
     }
   }
 
-  function switchToLauncher() {
-    const statusCard = document.getElementById('startup-status-card');
-    const dashboardGrid = document.getElementById('dashboard-grid');
-
-    if (statusCard) statusCard.classList.add('collapse-status');
-    if (dashboardGrid) dashboardGrid.classList.remove('pending-reveal');
+  // --- Launch Game Event ---
+  if (launchBtn) {
+    launchBtn.addEventListener('click', () => {
+      // Prevent multiple clicks
+      if (launchBtn.disabled) return;
+      
+      launchBtn.className = 'launch-btn main-action launching';
+      launchBtn.disabled = true;
+      launchBtn.innerHTML = '<span>⏳ Launching Game...</span>';
+      
+      // Call Rust backend to launch the game
+      invoke('launch_game').catch((err) => {
+        console.error("Failed to launch game:", err);
+        // Reset button on failure
+        updateStatusIndicators("None");
+      });
+    });
   }
 
-  function switchToLoading() {
-    const statusCard = document.getElementById('startup-status-card');
-    const dashboardGrid = document.getElementById('dashboard-grid');
-
-    if (statusCard) statusCard.classList.remove('collapse-status');
-    if (dashboardGrid) dashboardGrid.classList.add('pending-reveal');
-    
-    updateChecklist("None");
-  }
-
+  // --- Game State Listener ---
   let currentMode = "None";
 
   listen("game-state-changed", (event) => {
     const mode = event.payload;
     if (mode === currentMode) return; // 중복 이벤트 방지
     currentMode = mode;
+    updateStatusIndicators(mode);
+  });
 
-    if (mode === "None") {
-      switchToLoading();
-    } else {
-      updateChecklist(mode);
-      setTimeout(() => {
-        switchToLauncher();
-      }, 1000);
+  // --- Save Data Listener ---
+  const displayFarmName = document.getElementById('display-farm-name');
+  const displayFarmMeta = document.getElementById('display-farm-meta');
+  const displayFarmGold = document.getElementById('display-farm-gold');
+  const displayPlayTime = document.getElementById('display-play-time');
+  const displaySaveDate = document.getElementById('display-save-date');
+  const displaySeason = document.getElementById('display-season');
+
+  listen("save-updated", (event) => {
+    const data = event.payload;
+    if (!data) return;
+
+    if (displayFarmName) displayFarmName.textContent = `${data.farm_name} Farm`;
+    if (displayFarmMeta) {
+      displayFarmMeta.innerHTML = `Player: ${data.player_name} | <strong>Year ${data.year} · ${data.current_season} ${data.day_of_month}</strong>`;
     }
+    if (displayFarmGold) displayFarmGold.textContent = `${data.money.toLocaleString()} G`;
+    
+    if (displayPlayTime) {
+      if (data.time_played && data.time_played !== "") {
+        displayPlayTime.textContent = data.time_played;
+      } else if (data.days_played > 0) {
+        displayPlayTime.textContent = `${data.days_played} Days in-game`;
+      } else {
+        displayPlayTime.textContent = "Unknown";
+      }
+    }
+    
+    if (displaySaveDate) {
+      const now = new Date();
+      displaySaveDate.textContent = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    }
+
+    if (displaySeason) {
+      const seasonEmojiMap = {
+        "spring": "🌸 봄",
+        "summer": "☀️ 여름",
+        "fall": "🍂 가을",
+        "winter": "❄️ 겨울"
+      };
+      displaySeason.textContent = seasonEmojiMap[data.current_season.toLowerCase()] || data.current_season;
+    }
+  });
+
+  // --- Hotkey Logic ---
+  const hotkeyBtn = document.getElementById('btn-hotkey-change');
+  let isListeningForKey = false;
+
+  if (hotkeyBtn) {
+    invoke('get_hotkey').then((currentKey) => {
+      hotkeyBtn.textContent = currentKey || "F3";
+    });
+
+    hotkeyBtn.addEventListener('click', () => {
+      if (isListeningForKey) return;
+      isListeningForKey = true;
+      hotkeyBtn.classList.add('listening');
+      hotkeyBtn.textContent = "입력 대기 중...";
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if (!isListeningForKey) return;
+      e.preventDefault(); 
+      
+      const keyCode = e.code; // e.g. "F4", "KeyA"
+      hotkeyBtn.classList.remove('listening');
+      hotkeyBtn.textContent = keyCode;
+      isListeningForKey = false;
+
+      invoke('set_hotkey', { newKey: keyCode }).then(() => {
+        hotkeyBtn.classList.add('saved');
+        setTimeout(() => hotkeyBtn.classList.remove('saved'), 1000);
+      }).catch(err => {
+        console.error("Failed to set hotkey", err);
+        hotkeyBtn.textContent = "Error";
+      });
+    });
+  }
+
+  // --- Mod Download Buttons (Visual Mockup) ---
+  const modBtns = document.querySelectorAll('.mod-action-btn');
+  modBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (btn.classList.contains('downloading')) return;
+      btn.classList.add('downloading');
+      btn.textContent = "다운로드 중...";
+      setTimeout(() => {
+        btn.textContent = "설치 완료";
+        btn.style.background = "#388E3C";
+        btn.style.color = "white";
+        btn.style.borderColor = "#1B5E20";
+      }, 2000);
+    });
   });
 
   // 초기 상태 가져오기
   invoke('get_initial_game_state').then((mode) => {
     currentMode = mode;
-    if (mode !== "None") {
-      // 이미 켜져있으면 바로 대시보드 표시
-      switchToLauncher();
-      updateChecklist(mode);
-    }
+    updateStatusIndicators(mode);
   });
 });

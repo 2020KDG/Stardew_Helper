@@ -371,6 +371,13 @@ pub fn parse_save_file(path: &PathBuf) -> Result<SaveData, String> {
                         luck_level = text.parse().unwrap_or(0);
                     } else if current_tag == "daysPlayed" && days_played == 0 {
                         days_played = text.parse().unwrap_or(0);
+                    } else if current_tag == "millisecondsPlayed" {
+                        if let Ok(ms) = text.parse::<u64>() {
+                            let total_minutes = ms / 60000;
+                            let hours = total_minutes / 60;
+                            let minutes = total_minutes % 60;
+                            time_played = format!("{}h {}m", hours, minutes);
+                        }
                     } else if current_tag == "timePlayed" && time_played.is_empty() {
                         time_played = text;
                     } else if current_tag == "dailyLuck" && daily_luck == 0.0 {
